@@ -37,5 +37,19 @@
   "files": [
     "dist",
     "API.md"
+  ],
+  "keywords": [
+    "tree",
+    "binary tree",
+    "ternary tree",
+    "n-ary tree",
+    "k-ary tree",
+    "m-ary treedd",
+    "data structures",
+    "preorder traversal",
+    "postorder traversal",
+    "inorder traversal",
+    "breadth first traversal",
+    "node positioning"
   ]
 }
