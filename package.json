@@ -1,0 +1,41 @@
+{
+  "name": "m-ary-tree",
+  "version": "0.0.0",
+  "description": "A tree data structure",
+  "main": "dist/MAryTree.js",
+  "types": "dist/MAryTree.d.ts",
+  "repository": "git@github.com:jsakas/m-ary-tree.git",
+  "author": "Jon Sakas <jon.sakas@gmail.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "lint": "eslint",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "docs": "jsdoc2md --files ./src/*.ts --configure ./jsdoc2md.json > ./API.md"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
+    "@babel/plugin-proposal-private-methods": "^7.16.11",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^17.0.21",
+    "@typescript-eslint/eslint-plugin": "^5.15.0",
+    "@typescript-eslint/parser": "^5.15.0",
+    "conventional-changelog-cli": "^2.2.2",
+    "eslint": "^8.11.0",
+    "jest": "^27.5.1",
+    "jsdoc-babel": "^0.5.0",
+    "jsdoc-to-markdown": "^7.1.1",
+    "ts-jest": "^27.1.3",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2"
+  },
+  "files": [
+    "dist",
+    "API.md"
+  ]
+}

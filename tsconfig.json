@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "declaration": true,
+    "outDir": "dist",
+    "target": "ES5",
+    "sourceMap": true,
+  },
+  "files": [
+    "src/MAryTree.ts",
+    "src/calculateCoordinates.ts"
+  ]
+}
