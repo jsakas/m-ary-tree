@@ -345,7 +345,7 @@ export class MAryTree<K = MAryTreeKey, T = MAryTreeValue> {
   insert(
     parentNodeKey: K,
     key: K,
-    value?: T,
+    value?: T | MAryTree<K, T>,
   ): MAryTreeNode<K, T> | null {
     const parent = this.find(parentNodeKey);
 
@@ -356,10 +356,21 @@ export class MAryTree<K = MAryTreeKey, T = MAryTreeValue> {
         throw new Error('Cannot insert child node: parent already has max children');
       }
 
-      const node = new MAryTreeNode<K, T>(key, value, parent);
+      let node : MAryTreeNode<K, T> | null = null;
 
+      if (value && 'root' in value) {
+        node = new MAryTreeNode<K, T>(key, value.root.value, parent);
+
+        for (const child of value.root.children) {
+          child.parent = node
+          node.children.push(child);
+        }
+      } else {
+        node = new MAryTreeNode<K, T>(key, value as T, parent);
+      }
+      
       parent.children.push(node);
-
+  
       return node;
     }
 

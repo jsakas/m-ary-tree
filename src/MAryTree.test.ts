@@ -1,4 +1,4 @@
-import { MAryTree, MAryTreeNode } from "./MAryTree";
+import { MAryTree } from "./MAryTree";
 
 describe('MAryTree', () => {
   it('creates tree with single node', () => {
@@ -267,5 +267,24 @@ describe('MAryTree', () => {
 
     expect(b).toEqual([ 'G', 'H' ]);
     
+  });
+
+  it('can combine trees', () => {
+    const bt1 = new MAryTree(1);
+
+    const bt2 = new MAryTree(2);
+
+    bt2.insert(2, 4);
+    bt2.insert(2, 5);
+    bt2.insert(5, 7);
+
+    bt1.insert(1, 2, bt2);
+
+    bt1.insert(1, 3);
+    bt1.insert(3, 6);
+
+    const a = Array.from(bt1.breadthFirstTraversal()).map(n => n.key);
+
+    expect(a).toEqual([ 1, 2, 3, 4, 5, 6, 7]);
   });
 });
