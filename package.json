@@ -10,6 +10,7 @@
   "dependencies": {},
   "scripts": {
     "build": "tsc",
+    "dev": "tsc -w",
     "test": "jest",
     "lint": "eslint",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",

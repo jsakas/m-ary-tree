@@ -4,7 +4,7 @@ import { MAryTree } from "./MAryTree";
 
 describe('calculateCoordinates', () => {
   it('can calculate x coordinates', () => {
-    const bt = new MAryTree<MAryTreeValuePositioned>('O');
+    const bt = new MAryTree<string, MAryTreeValuePositioned>('O');
 
     bt.insert('O', 'E');
     bt.insert('O', 'F');
@@ -50,7 +50,7 @@ describe('calculateCoordinates', () => {
   });
 
   it('can calculate y coordinates', () => {
-    const bt = new MAryTree<MAryTreeValuePositioned>('O');
+    const bt = new MAryTree<string, MAryTreeValuePositioned>('O');
 
     bt.insert('O', 'E');
     bt.insert('O', 'F');

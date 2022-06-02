@@ -41,12 +41,12 @@ describe('MAryTree', () => {
 
     expect(bt.depth(bt.root)).toBe(0);
 
-    expect(bt.depth(bt.insert(1, 2) as MAryTreeNode)).toBe(1);
-    expect(bt.depth(bt.insert(1, 3) as MAryTreeNode)).toBe(1);
-    expect(bt.depth(bt.insert(2, 4) as MAryTreeNode)).toBe(2);
-    expect(bt.depth(bt.insert(2, 5) as MAryTreeNode)).toBe(2);
-    expect(bt.depth(bt.insert(3, 6) as MAryTreeNode)).toBe(2);
-    expect(bt.depth(bt.insert(5, 7) as MAryTreeNode)).toBe(3);
+    expect(bt.depth(bt.insert(1, 2))).toBe(1);
+    expect(bt.depth(bt.insert(1, 3))).toBe(1);
+    expect(bt.depth(bt.insert(2, 4))).toBe(2);
+    expect(bt.depth(bt.insert(2, 5))).toBe(2);
+    expect(bt.depth(bt.insert(3, 6))).toBe(2);
+    expect(bt.depth(bt.insert(5, 7))).toBe(3);
   });
 
   it('can get height', () => {
@@ -318,7 +318,7 @@ describe('MAryTree', () => {
     const n = bt.insert(1, 6);
     bt.insert(1, 7);
 
-    const a = Array.from(bt.leftSiblingTraversal(n as MAryTreeNode)).map(n => n.key);
+    const a = Array.from(bt.leftSiblingTraversal(n)).map(n => n.key);
 
     expect(a).toEqual([ 5, 4, 3, 2 ]);
   });
@@ -349,7 +349,7 @@ describe('MAryTree', () => {
 
     expect(a).toEqual([ 'E', 'A', 'B' ]);
 
-    const b = Array.from(bt.leftDescendantTraversal(N as MAryTreeNode)).map(n => n.key);
+    const b = Array.from(bt.leftDescendantTraversal(N)).map(n => n.key);
 
     expect(b).toEqual([ 'G', 'H' ]);
     
