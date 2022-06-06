@@ -1,12 +1,12 @@
 
 import { MAryTree, MAryTreeKey, MAryTreeNode } from './MAryTree';
 
-export type MAryTreeValuePositioned = {
+export type MAryTreeValuePositioned<T = unknown> = {
   x?: number;
   y?: number;
   prelimX?: number;
   modifier?: number;
-  data: unknown;
+  data: T;
 };
 
 export type CalculateCoordinatesOptions = {
