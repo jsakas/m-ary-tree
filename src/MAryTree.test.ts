@@ -1,15 +1,15 @@
-import { MAryTree } from "./MAryTree";
+import { Tree } from "./MAryTree";
 
-describe('MAryTree', () => {
+describe('Tree', () => {
   it('creates tree with single node', () => {
-    const bt = new MAryTree(0);
+    const bt = new Tree(0);
 
     expect(bt.root.parent).toBe(null);
     expect(bt.root.children).toEqual([]);
   });
 
   it('enforces max children', () => {
-    const bt = new MAryTree(1, 1, {
+    const bt = new Tree(1, 1, {
       maxChildren: 3,
     });
     
@@ -21,7 +21,7 @@ describe('MAryTree', () => {
   });
 
   it('can check descendents', () => {
-    const bt = new MAryTree(1);
+    const bt = new Tree(1);
 
     bt.insert(1, 2);
     bt.insert(1, 3);
@@ -37,7 +37,7 @@ describe('MAryTree', () => {
   });
 
   it('can get depth', () => {
-    const bt = new MAryTree(1);
+    const bt = new Tree(1);
 
     expect(bt.depth(bt.root)).toBe(0);
 
@@ -50,7 +50,7 @@ describe('MAryTree', () => {
   });
 
   it('can get height', () => {
-    const bt = new MAryTree(1);
+    const bt = new Tree(1);
 
     bt.insert(1, 2);
     bt.insert(1, 3);
@@ -64,7 +64,7 @@ describe('MAryTree', () => {
   });
 
   it('can get row', () => {
-    const bt = new MAryTree(1);
+    const bt = new Tree(1);
 
     bt.insert(1, 2);
     bt.insert(1, 3);
@@ -80,7 +80,7 @@ describe('MAryTree', () => {
   });
 
   it('can connect left neighbor', () => {
-    const bt = new MAryTree('O');
+    const bt = new Tree('O');
 
     bt.insert('O', 'E');
     bt.insert('O', 'F');
@@ -126,7 +126,7 @@ describe('MAryTree', () => {
   });
 
   it('can get left most descendant at depth', () => {
-    const bt = new MAryTree('O');
+    const bt = new Tree('O');
 
     bt.insert('O', 'E');
     bt.insert('O', 'F');
@@ -153,7 +153,7 @@ describe('MAryTree', () => {
   });
 
   it('inOrderTraversal', () => {
-    const bt = new MAryTree(1);
+    const bt = new Tree(1);
 
     bt.insert(1, 2);
     bt.insert(1, 3);
@@ -168,7 +168,7 @@ describe('MAryTree', () => {
   }); 
 
   it('preOrderTraversal', () => {
-    const bt = new MAryTree(1);
+    const bt = new Tree(1);
 
     bt.insert(1, 2);
     bt.insert(1, 3);
@@ -181,7 +181,7 @@ describe('MAryTree', () => {
   }); 
 
   it('postOrderTraversal', () => {
-    const bt = new MAryTree('O');
+    const bt = new Tree('O');
 
     bt.insert('O', 'E');
     bt.insert('O', 'F');
@@ -208,7 +208,7 @@ describe('MAryTree', () => {
   });
 
   it('breadthFirstTraversal', () => {
-    const bt = new MAryTree(1);
+    const bt = new Tree(1);
 
     bt.insert(1, 2);
     bt.insert(1, 3);
@@ -223,7 +223,7 @@ describe('MAryTree', () => {
   });
 
   it('leftSiblingTraversal', () => {
-    const bt = new MAryTree(1);
+    const bt = new Tree(1);
 
     bt.insert(1, 2);
     bt.insert(1, 3);
@@ -238,7 +238,7 @@ describe('MAryTree', () => {
   });
 
   it('leftDescendantTraversal', () => {
-    const bt = new MAryTree('O');
+    const bt = new Tree('O');
 
     bt.insert('O', 'E');
     bt.insert('O', 'F');
@@ -270,9 +270,9 @@ describe('MAryTree', () => {
   });
 
   it('can combine trees', () => {
-    const bt1 = new MAryTree(1);
+    const bt1 = new Tree(1);
 
-    const bt2 = new MAryTree(2);
+    const bt2 = new Tree(2);
 
     bt2.insert(2, 4);
     bt2.insert(2, 5);
