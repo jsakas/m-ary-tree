@@ -57,7 +57,7 @@ type MyNodeType = {
   data: string;
 }
 
-const tree = new MAryTree<MyNodeType>(0, { data: 'foo' });
+const tree = new MAryTree<number, MyNodeType>(0, { data: 'foo' });
 ```
 
 ## Motivation
@@ -70,7 +70,7 @@ Also included is a utility `calculateCoordinates` which will allow you calculate
 import calculateCoordinates, { MAryTreeValuePositioned } from "m-ary-tree/dist/calculateCoordinates";
 import { MAryTree } from "m-ary-tree";
 
-const tree = new MAryTree<MAryTreeValuePositioned>('O');
+const tree = new MAryTree<string, MAryTreeValuePositioned>('O');
 
 tree.insert('O', 'E');
 tree.insert('O', 'F');

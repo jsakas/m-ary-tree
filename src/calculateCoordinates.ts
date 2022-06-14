@@ -1,12 +1,12 @@
 
-import { MAryTree, MAryTreeNode } from './MAryTree';
+import { Tree, TreeKey, TreeNode } from './MAryTree';
 
-export type MAryTreeValuePositioned = {
+export type TreeValuePositioned<T = unknown> = {
   x?: number;
   y?: number;
   prelimX?: number;
   modifier?: number;
-  data: unknown;
+  data: T;
 };
 
 export type CalculateCoordinatesOptions = {
@@ -24,7 +24,7 @@ export type CalculateCoordinatesOptions = {
  * 
  * Reference: [https://www.cs.unc.edu/techreports/89-034.pdf](https://www.cs.unc.edu/techreports/89-034.pdf)
  */
-export default function calculateCoordinates(tree: MAryTree<MAryTreeValuePositioned>, options : CalculateCoordinatesOptions = {}) {
+export default function calculateCoordinates<K = TreeKey>(tree: Tree<K, TreeValuePositioned>, options : CalculateCoordinatesOptions = {}) {
   const {
     nodeWidth = 2,
     nodeSpacingX = 4,
@@ -93,10 +93,10 @@ export default function calculateCoordinates(tree: MAryTree<MAryTreeValuePositio
  * Warning: Do not use this method directly. Call `calculateCoordinates` instead.
  * 
  * @private
- * @param {MAryTreeNode} node 
+ * @param {TreeNode} node 
  * @returns {number}
  */
-function calculateX(node: MAryTreeNode<MAryTreeValuePositioned>): number {
+function calculateX<K = TreeKey>(node: TreeNode<K, TreeValuePositioned>): number {
   let x = node.value.prelimX;
 
   let parent = node.parent;

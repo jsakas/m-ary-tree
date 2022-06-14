@@ -1,15 +1,15 @@
-import { MAryTree, MAryTreeNode } from "./MAryTree";
+import { Tree } from "./MAryTree";
 
-describe('MAryTree', () => {
+describe('Tree', () => {
   it('creates tree with single node', () => {
-    const bt = new MAryTree(0);
+    const bt = new Tree(0);
 
     expect(bt.root.parent).toBe(null);
     expect(bt.root.children).toEqual([]);
   });
 
   it('enforces max children', () => {
-    const bt = new MAryTree(1, 1, {
+    const bt = new Tree(1, 1, {
       maxChildren: 3,
     });
     
@@ -21,7 +21,7 @@ describe('MAryTree', () => {
   });
 
   it('can check descendents', () => {
-    const bt = new MAryTree(1);
+    const bt = new Tree(1);
 
     bt.insert(1, 2);
     bt.insert(1, 3);
@@ -37,20 +37,20 @@ describe('MAryTree', () => {
   });
 
   it('can get depth', () => {
-    const bt = new MAryTree(1);
+    const bt = new Tree(1);
 
     expect(bt.depth(bt.root)).toBe(0);
 
-    expect(bt.depth(bt.insert(1, 2) as MAryTreeNode)).toBe(1);
-    expect(bt.depth(bt.insert(1, 3) as MAryTreeNode)).toBe(1);
-    expect(bt.depth(bt.insert(2, 4) as MAryTreeNode)).toBe(2);
-    expect(bt.depth(bt.insert(2, 5) as MAryTreeNode)).toBe(2);
-    expect(bt.depth(bt.insert(3, 6) as MAryTreeNode)).toBe(2);
-    expect(bt.depth(bt.insert(5, 7) as MAryTreeNode)).toBe(3);
+    expect(bt.depth(bt.insert(1, 2))).toBe(1);
+    expect(bt.depth(bt.insert(1, 3))).toBe(1);
+    expect(bt.depth(bt.insert(2, 4))).toBe(2);
+    expect(bt.depth(bt.insert(2, 5))).toBe(2);
+    expect(bt.depth(bt.insert(3, 6))).toBe(2);
+    expect(bt.depth(bt.insert(5, 7))).toBe(3);
   });
 
   it('can get height', () => {
-    const bt = new MAryTree(1);
+    const bt = new Tree(1);
 
     bt.insert(1, 2);
     bt.insert(1, 3);
@@ -64,7 +64,7 @@ describe('MAryTree', () => {
   });
 
   it('can get row', () => {
-    const bt = new MAryTree(1);
+    const bt = new Tree(1);
 
     bt.insert(1, 2);
     bt.insert(1, 3);
@@ -80,7 +80,7 @@ describe('MAryTree', () => {
   });
 
   it('can connect left neighbor', () => {
-    const bt = new MAryTree('O');
+    const bt = new Tree('O');
 
     bt.insert('O', 'E');
     bt.insert('O', 'F');
@@ -126,7 +126,7 @@ describe('MAryTree', () => {
   });
 
   it('can get left most descendant at depth', () => {
-    const bt = new MAryTree('O');
+    const bt = new Tree('O');
 
     bt.insert('O', 'E');
     bt.insert('O', 'F');
@@ -152,94 +152,8 @@ describe('MAryTree', () => {
     expect(bt.leftMostDescendant(bt.find('N'), 2)?.key).toEqual('H');
   });
 
-  // it('can calculate x coordinates', () => {
-  //   const bt = new MAryTree('O');
-
-  //   bt.insert('O', 'E');
-  //   bt.insert('O', 'F');
-  //   bt.insert('O', 'N');
-
-  //   bt.insert('E', 'A');
-  //   bt.insert('E', 'D');
-
-  //   bt.insert('D', 'B');
-  //   bt.insert('D', 'C');
-
-  //   bt.insert('N', 'G');
-  //   bt.insert('N', 'M');
-
-  //   bt.insert('M', 'H');
-  //   bt.insert('M', 'I');
-  //   bt.insert('M', 'J');
-  //   bt.insert('M', 'K');
-  //   bt.insert('M', 'L');
-
-  //   bt.calculateCoordinates();
-
-  //   expect(bt.find('O')?.x).toEqual(13.5);
-  //   expect(bt.find('E')?.x).toEqual(3);
-  //   expect(bt.find('A')?.x).toEqual(0);
-  //   expect(bt.find('D')?.x).toEqual(6);
-  //   expect(bt.find('B')?.x).toEqual(3);
-  //   expect(bt.find('C')?.x).toEqual(9);
-    
-  //   // Note: In John Q. Walker's original algorithm, this is modified to 13.5
-  //   // Our algorithm does not account for this offset
-  //   expect(bt.find('F')?.x).toEqual(9);
-
-  //   expect(bt.find('N')?.x).toEqual(24);
-  //   expect(bt.find('G')?.x).toEqual(21);
-  //   expect(bt.find('M')?.x).toEqual(27);
-  //   expect(bt.find('H')?.x).toEqual(15);
-  //   expect(bt.find('I')?.x).toEqual(21);
-  //   expect(bt.find('J')?.x).toEqual(27);
-  //   expect(bt.find('K')?.x).toEqual(33);
-  //   expect(bt.find('L')?.x).toEqual(39);
-  // });
-
-  // it('can calculate y coordinates', () => {
-  //   const bt = new MAryTree('O');
-
-  //   bt.insert('O', 'E');
-  //   bt.insert('O', 'F');
-  //   bt.insert('O', 'N');
-
-  //   bt.insert('E', 'A');
-  //   bt.insert('E', 'D');
-
-  //   bt.insert('D', 'B');
-  //   bt.insert('D', 'C');
-
-  //   bt.insert('N', 'G');
-  //   bt.insert('N', 'M');
-
-  //   bt.insert('M', 'H');
-  //   bt.insert('M', 'I');
-  //   bt.insert('M', 'J');
-  //   bt.insert('M', 'K');
-  //   bt.insert('M', 'L');
-
-  //   bt.calculateCoordinates();
-
-  //   expect(bt.find('O')?.y).toEqual(0);
-  //   expect(bt.find('E')?.y).toEqual(6);
-  //   expect(bt.find('A')?.y).toEqual(12);
-  //   expect(bt.find('D')?.y).toEqual(12);
-  //   expect(bt.find('B')?.y).toEqual(18);
-  //   expect(bt.find('C')?.y).toEqual(18);
-  //   expect(bt.find('F')?.y).toEqual(6);
-  //   expect(bt.find('N')?.y).toEqual(6);
-  //   expect(bt.find('G')?.y).toEqual(12);
-  //   expect(bt.find('M')?.y).toEqual(12);
-  //   expect(bt.find('H')?.y).toEqual(18);
-  //   expect(bt.find('I')?.y).toEqual(18);
-  //   expect(bt.find('J')?.y).toEqual(18);
-  //   expect(bt.find('K')?.y).toEqual(18);
-  //   expect(bt.find('L')?.y).toEqual(18);
-  // });
-
   it('inOrderTraversal', () => {
-    const bt = new MAryTree(1);
+    const bt = new Tree(1);
 
     bt.insert(1, 2);
     bt.insert(1, 3);
@@ -254,7 +168,7 @@ describe('MAryTree', () => {
   }); 
 
   it('preOrderTraversal', () => {
-    const bt = new MAryTree(1);
+    const bt = new Tree(1);
 
     bt.insert(1, 2);
     bt.insert(1, 3);
@@ -267,7 +181,7 @@ describe('MAryTree', () => {
   }); 
 
   it('postOrderTraversal', () => {
-    const bt = new MAryTree('O');
+    const bt = new Tree('O');
 
     bt.insert('O', 'E');
     bt.insert('O', 'F');
@@ -294,7 +208,7 @@ describe('MAryTree', () => {
   });
 
   it('breadthFirstTraversal', () => {
-    const bt = new MAryTree(1);
+    const bt = new Tree(1);
 
     bt.insert(1, 2);
     bt.insert(1, 3);
@@ -309,7 +223,7 @@ describe('MAryTree', () => {
   });
 
   it('leftSiblingTraversal', () => {
-    const bt = new MAryTree(1);
+    const bt = new Tree(1);
 
     bt.insert(1, 2);
     bt.insert(1, 3);
@@ -318,13 +232,13 @@ describe('MAryTree', () => {
     const n = bt.insert(1, 6);
     bt.insert(1, 7);
 
-    const a = Array.from(bt.leftSiblingTraversal(n as MAryTreeNode)).map(n => n.key);
+    const a = Array.from(bt.leftSiblingTraversal(n)).map(n => n.key);
 
     expect(a).toEqual([ 5, 4, 3, 2 ]);
   });
 
   it('leftDescendantTraversal', () => {
-    const bt = new MAryTree('O');
+    const bt = new Tree('O');
 
     bt.insert('O', 'E');
     bt.insert('O', 'F');
@@ -349,9 +263,28 @@ describe('MAryTree', () => {
 
     expect(a).toEqual([ 'E', 'A', 'B' ]);
 
-    const b = Array.from(bt.leftDescendantTraversal(N as MAryTreeNode)).map(n => n.key);
+    const b = Array.from(bt.leftDescendantTraversal(N)).map(n => n.key);
 
     expect(b).toEqual([ 'G', 'H' ]);
     
+  });
+
+  it('can combine trees', () => {
+    const bt1 = new Tree(1);
+
+    const bt2 = new Tree(2);
+
+    bt2.insert(2, 4);
+    bt2.insert(2, 5);
+    bt2.insert(5, 7);
+
+    bt1.insert(1, 2, bt2);
+
+    bt1.insert(1, 3);
+    bt1.insert(3, 6);
+
+    const a = Array.from(bt1.breadthFirstTraversal()).map(n => n.key);
+
+    expect(a).toEqual([ 1, 2, 3, 4, 5, 6, 7]);
   });
 });

@@ -1,9 +1,9 @@
 ## Classes
 
 <dl>
-<dt><a href="#MAryTreeNode">MAryTreeNode</a></dt>
+<dt><a href="#TreeNode">TreeNode</a></dt>
 <dd></dd>
-<dt><a href="#MAryTree">MAryTree</a></dt>
+<dt><a href="#Tree">Tree</a></dt>
 <dd></dd>
 </dl>
 
@@ -17,308 +17,308 @@ based on the node width and spacing options.</p>
 <p>Reference: <a href="https://www.cs.unc.edu/techreports/89-034.pdf">https://www.cs.unc.edu/techreports/89-034.pdf</a></p></dd>
 </dl>
 
-<a name="MAryTreeNode"></a>
+<a name="TreeNode"></a>
 
-## MAryTreeNode
+## TreeNode
 **Kind**: global class  
 
-* [MAryTreeNode](#MAryTreeNode)
-    * [new MAryTreeNode(key, value, parent)](#new_MAryTreeNode_new)
+* [TreeNode](#TreeNode)
+    * [new TreeNode(key, value, parent)](#new_TreeNode_new)
     * _instance_
-        * [.isLeaf](#MAryTreeNode+isLeaf) ⇒ <code>boolean</code>
-        * [.hasChildren](#MAryTreeNode+hasChildren) ⇒ <code>boolean</code>
-        * [.siblingIndex](#MAryTreeNode+siblingIndex) ⇒ <code>number</code>
-        * [.leftSibling](#MAryTreeNode+leftSibling) ⇒ [<code>MAryTreeNode</code>](#MAryTreeNode) \| <code>null</code>
-        * [.isDescendant(node)](#MAryTreeNode+isDescendant) ⇒ <code>boolean</code>
+        * [.isLeaf](#TreeNode+isLeaf) ⇒ <code>boolean</code>
+        * [.hasChildren](#TreeNode+hasChildren) ⇒ <code>boolean</code>
+        * [.siblingIndex](#TreeNode+siblingIndex) ⇒ <code>number</code>
+        * [.leftSibling](#TreeNode+leftSibling) ⇒ [<code>TreeNode</code>](#TreeNode) \| <code>null</code>
+        * [.isDescendant(node)](#TreeNode+isDescendant) ⇒ <code>boolean</code>
     * _static_
-        * [.key](#MAryTreeNode.key) : <code>MAryTreeKey</code>
-        * [.value](#MAryTreeNode.value) : <code>MAryTreeValue</code>
-        * [.parent](#MAryTreeNode.parent) : [<code>MAryTreeNode</code>](#MAryTreeNode)
-        * [.children](#MAryTreeNode.children) : [<code>Array.&lt;MAryTreeNode&gt;</code>](#MAryTreeNode)
-        * [.leftNeighbor](#MAryTreeNode.leftNeighbor) : [<code>MAryTreeNode</code>](#MAryTreeNode)
+        * [.key](#TreeNode.key) : <code>TreeKey</code>
+        * [.value](#TreeNode.value) : <code>TreeValue</code>
+        * [.parent](#TreeNode.parent) : [<code>TreeNode</code>](#TreeNode)
+        * [.children](#TreeNode.children) : [<code>Array.&lt;TreeNode&gt;</code>](#TreeNode)
+        * [.leftNeighbor](#TreeNode.leftNeighbor) : [<code>TreeNode</code>](#TreeNode)
 
-<a name="new_MAryTreeNode_new"></a>
+<a name="new_TreeNode_new"></a>
 
-### new MAryTreeNode(key, value, parent)
-<p>MAryTreeNode constructor</p>
+### new TreeNode(key, value, parent)
+<p>TreeNode constructor</p>
 
 
 | Param | Type | Default |
 | --- | --- | --- |
-| key | <code>MAryTreeKey</code> |  | 
-| value | <code>MAryTreeValue</code> |  | 
-| parent | [<code>MAryTreeNode</code>](#MAryTreeNode) \| <code>null</code> | <code></code> | 
+| key | <code>TreeKey</code> |  | 
+| value | <code>TreeValue</code> |  | 
+| parent | [<code>TreeNode</code>](#TreeNode) \| <code>null</code> | <code></code> | 
 
-<a name="MAryTreeNode+isLeaf"></a>
+<a name="TreeNode+isLeaf"></a>
 
-### mAryTreeNode.isLeaf ⇒ <code>boolean</code>
+### treeNode.isLeaf ⇒ <code>boolean</code>
 <p>Returns true if this node has no children.</p>
 
-**Kind**: instance property of [<code>MAryTreeNode</code>](#MAryTreeNode)  
-<a name="MAryTreeNode+hasChildren"></a>
+**Kind**: instance property of [<code>TreeNode</code>](#TreeNode)  
+<a name="TreeNode+hasChildren"></a>
 
-### mAryTreeNode.hasChildren ⇒ <code>boolean</code>
+### treeNode.hasChildren ⇒ <code>boolean</code>
 <p>Returns true if this node has children.</p>
 
-**Kind**: instance property of [<code>MAryTreeNode</code>](#MAryTreeNode)  
-<a name="MAryTreeNode+siblingIndex"></a>
+**Kind**: instance property of [<code>TreeNode</code>](#TreeNode)  
+<a name="TreeNode+siblingIndex"></a>
 
-### mAryTreeNode.siblingIndex ⇒ <code>number</code>
+### treeNode.siblingIndex ⇒ <code>number</code>
 <p>Returns the index of this node amoung its sibling nodes.</p>
 
-**Kind**: instance property of [<code>MAryTreeNode</code>](#MAryTreeNode)  
-<a name="MAryTreeNode+leftSibling"></a>
+**Kind**: instance property of [<code>TreeNode</code>](#TreeNode)  
+<a name="TreeNode+leftSibling"></a>
 
-### mAryTreeNode.leftSibling ⇒ [<code>MAryTreeNode</code>](#MAryTreeNode) \| <code>null</code>
+### treeNode.leftSibling ⇒ [<code>TreeNode</code>](#TreeNode) \| <code>null</code>
 <p>Returns the left sibling of this node if it exists.</p>
 
-**Kind**: instance property of [<code>MAryTreeNode</code>](#MAryTreeNode)  
-<a name="MAryTreeNode+isDescendant"></a>
+**Kind**: instance property of [<code>TreeNode</code>](#TreeNode)  
+<a name="TreeNode+isDescendant"></a>
 
-### mAryTreeNode.isDescendant(node) ⇒ <code>boolean</code>
+### treeNode.isDescendant(node) ⇒ <code>boolean</code>
 <p>Check if this node is a descendent of a parent.</p>
 
-**Kind**: instance method of [<code>MAryTreeNode</code>](#MAryTreeNode)  
+**Kind**: instance method of [<code>TreeNode</code>](#TreeNode)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| node | [<code>MAryTreeNode</code>](#MAryTreeNode) | <p>the parent node to check against</p> |
+| node | [<code>TreeNode</code>](#TreeNode) | <p>the parent node to check against</p> |
 
-<a name="MAryTreeNode.key"></a>
+<a name="TreeNode.key"></a>
 
-### MAryTreeNode.key : <code>MAryTreeKey</code>
+### TreeNode.key : <code>TreeKey</code>
 <p>key for this node</p>
 
-**Kind**: static property of [<code>MAryTreeNode</code>](#MAryTreeNode)  
-<a name="MAryTreeNode.value"></a>
+**Kind**: static property of [<code>TreeNode</code>](#TreeNode)  
+<a name="TreeNode.value"></a>
 
-### MAryTreeNode.value : <code>MAryTreeValue</code>
+### TreeNode.value : <code>TreeValue</code>
 <p>information stored on node</p>
 
-**Kind**: static property of [<code>MAryTreeNode</code>](#MAryTreeNode)  
-<a name="MAryTreeNode.parent"></a>
+**Kind**: static property of [<code>TreeNode</code>](#TreeNode)  
+<a name="TreeNode.parent"></a>
 
-### MAryTreeNode.parent : [<code>MAryTreeNode</code>](#MAryTreeNode)
+### TreeNode.parent : [<code>TreeNode</code>](#TreeNode)
 <p>reference to this nodes parent</p>
 
-**Kind**: static property of [<code>MAryTreeNode</code>](#MAryTreeNode)  
-<a name="MAryTreeNode.children"></a>
+**Kind**: static property of [<code>TreeNode</code>](#TreeNode)  
+<a name="TreeNode.children"></a>
 
-### MAryTreeNode.children : [<code>Array.&lt;MAryTreeNode&gt;</code>](#MAryTreeNode)
+### TreeNode.children : [<code>Array.&lt;TreeNode&gt;</code>](#TreeNode)
 <p>array of child nodes</p>
 
-**Kind**: static property of [<code>MAryTreeNode</code>](#MAryTreeNode)  
-<a name="MAryTreeNode.leftNeighbor"></a>
+**Kind**: static property of [<code>TreeNode</code>](#TreeNode)  
+<a name="TreeNode.leftNeighbor"></a>
 
-### MAryTreeNode.leftNeighbor : [<code>MAryTreeNode</code>](#MAryTreeNode)
+### TreeNode.leftNeighbor : [<code>TreeNode</code>](#TreeNode)
 <p>reference to this nodes left neighbor</p>
 
-**Kind**: static property of [<code>MAryTreeNode</code>](#MAryTreeNode)  
-<a name="MAryTree"></a>
+**Kind**: static property of [<code>TreeNode</code>](#TreeNode)  
+<a name="Tree"></a>
 
-## MAryTree
+## Tree
 **Kind**: global class  
 
-* [MAryTree](#MAryTree)
-    * [new MAryTree(key, value, options)](#new_MAryTree_new)
+* [Tree](#Tree)
+    * [new Tree(key, value, options)](#new_Tree_new)
     * _instance_
-        * [.inOrderTraversal(root)](#MAryTree+inOrderTraversal)
-        * [.postOrderTraversal(root)](#MAryTree+postOrderTraversal)
-        * [.preOrderTraversal(root)](#MAryTree+preOrderTraversal)
-        * [.breadthFirstTraversal(root)](#MAryTree+breadthFirstTraversal)
-        * [.rowTraversal(root)](#MAryTree+rowTraversal)
-        * [.leftSiblingTraversal(root)](#MAryTree+leftSiblingTraversal)
-        * [.leftDescendantTraversal(root)](#MAryTree+leftDescendantTraversal)
-        * [.leftMostDescendant(root, depth)](#MAryTree+leftMostDescendant) ⇒ [<code>MAryTreeNode</code>](#MAryTreeNode) \| <code>null</code>
-        * [.connectLeftNeighbor()](#MAryTree+connectLeftNeighbor)
-        * [.insert(parentNodeKey, key, value)](#MAryTree+insert) ⇒ [<code>MAryTreeNode</code>](#MAryTreeNode) \| <code>null</code>
-        * [.remove(key)](#MAryTree+remove) ⇒ <code>boolean</code>
-        * [.find(key)](#MAryTree+find) ⇒ [<code>MAryTreeNode</code>](#MAryTreeNode) \| <code>null</code>
-        * [.depth(node)](#MAryTree+depth) ⇒ <code>number</code>
-        * [.height(node)](#MAryTree+height) ⇒ <code>number</code>
+        * [.inOrderTraversal(root)](#Tree+inOrderTraversal)
+        * [.postOrderTraversal(root)](#Tree+postOrderTraversal)
+        * [.preOrderTraversal(root)](#Tree+preOrderTraversal)
+        * [.breadthFirstTraversal(root)](#Tree+breadthFirstTraversal)
+        * [.rowTraversal(root)](#Tree+rowTraversal)
+        * [.leftSiblingTraversal(root)](#Tree+leftSiblingTraversal)
+        * [.leftDescendantTraversal(root)](#Tree+leftDescendantTraversal)
+        * [.leftMostDescendant(root, depth)](#Tree+leftMostDescendant) ⇒ [<code>TreeNode</code>](#TreeNode) \| <code>null</code>
+        * [.connectLeftNeighbor()](#Tree+connectLeftNeighbor)
+        * [.insert(parentNodeKey, key, value)](#Tree+insert) ⇒ [<code>TreeNode</code>](#TreeNode) \| <code>null</code>
+        * [.remove(key)](#Tree+remove) ⇒ <code>boolean</code>
+        * [.find(key)](#Tree+find) ⇒ [<code>TreeNode</code>](#TreeNode) \| <code>null</code>
+        * [.depth(node)](#Tree+depth) ⇒ <code>number</code>
+        * [.height(node)](#Tree+height) ⇒ <code>number</code>
     * _static_
-        * [.root](#MAryTree.root) : [<code>MAryTreeNode</code>](#MAryTreeNode)
-        * [.options](#MAryTree.options) : <code>MAryTreeOptions</code>
+        * [.root](#Tree.root) : [<code>TreeNode</code>](#TreeNode)
+        * [.options](#Tree.options) : <code>TreeOptions</code>
 
-<a name="new_MAryTree_new"></a>
+<a name="new_Tree_new"></a>
 
-### new MAryTree(key, value, options)
+### new Tree(key, value, options)
 
 | Param | Type |
 | --- | --- |
-| key | <code>MAryTreeKey</code> | 
-| value | <code>MAryTreeValue</code> | 
-| options | <code>MAryTreeOptions</code> | 
+| key | <code>TreeKey</code> | 
+| value | <code>TreeValue</code> | 
+| options | <code>TreeOptions</code> | 
 
-<a name="MAryTree+inOrderTraversal"></a>
+<a name="Tree+inOrderTraversal"></a>
 
-### mAryTree.inOrderTraversal(root)
+### tree.inOrderTraversal(root)
 <p>Generates nodes in an in-order traversal</p>
 
-**Kind**: instance method of [<code>MAryTree</code>](#MAryTree)  
+**Kind**: instance method of [<code>Tree</code>](#Tree)  
 
 | Param | Type |
 | --- | --- |
-| root | [<code>MAryTreeNode</code>](#MAryTreeNode) | 
+| root | [<code>TreeNode</code>](#TreeNode) | 
 
-<a name="MAryTree+postOrderTraversal"></a>
+<a name="Tree+postOrderTraversal"></a>
 
-### mAryTree.postOrderTraversal(root)
+### tree.postOrderTraversal(root)
 <p>Generates nodes in a post-order traversal</p>
 
-**Kind**: instance method of [<code>MAryTree</code>](#MAryTree)  
+**Kind**: instance method of [<code>Tree</code>](#Tree)  
 
 | Param | Type |
 | --- | --- |
-| root | [<code>MAryTreeNode</code>](#MAryTreeNode) | 
+| root | [<code>TreeNode</code>](#TreeNode) | 
 
-<a name="MAryTree+preOrderTraversal"></a>
+<a name="Tree+preOrderTraversal"></a>
 
-### mAryTree.preOrderTraversal(root)
+### tree.preOrderTraversal(root)
 <p>Generates nodes in an pre-order traversal</p>
 
-**Kind**: instance method of [<code>MAryTree</code>](#MAryTree)  
+**Kind**: instance method of [<code>Tree</code>](#Tree)  
 
 | Param | Type |
 | --- | --- |
-| root | [<code>MAryTreeNode</code>](#MAryTreeNode) | 
+| root | [<code>TreeNode</code>](#TreeNode) | 
 
-<a name="MAryTree+breadthFirstTraversal"></a>
+<a name="Tree+breadthFirstTraversal"></a>
 
-### mAryTree.breadthFirstTraversal(root)
+### tree.breadthFirstTraversal(root)
 <p>Generates nodes in an breadth-first traversal</p>
 
-**Kind**: instance method of [<code>MAryTree</code>](#MAryTree)  
+**Kind**: instance method of [<code>Tree</code>](#Tree)  
 
 | Param | Type |
 | --- | --- |
-| root | [<code>MAryTreeNode</code>](#MAryTreeNode) | 
+| root | [<code>TreeNode</code>](#TreeNode) | 
 
-<a name="MAryTree+rowTraversal"></a>
+<a name="Tree+rowTraversal"></a>
 
-### mAryTree.rowTraversal(root)
+### tree.rowTraversal(root)
 <p>Generates nodes at a single depth</p>
 
-**Kind**: instance method of [<code>MAryTree</code>](#MAryTree)  
+**Kind**: instance method of [<code>Tree</code>](#Tree)  
 
 | Param | Type |
 | --- | --- |
-| root | [<code>MAryTreeNode</code>](#MAryTreeNode) | 
+| root | [<code>TreeNode</code>](#TreeNode) | 
 
-<a name="MAryTree+leftSiblingTraversal"></a>
+<a name="Tree+leftSiblingTraversal"></a>
 
-### mAryTree.leftSiblingTraversal(root)
+### tree.leftSiblingTraversal(root)
 <p>Generates left-sibling nodes</p>
 
-**Kind**: instance method of [<code>MAryTree</code>](#MAryTree)  
+**Kind**: instance method of [<code>Tree</code>](#Tree)  
 
 | Param | Type |
 | --- | --- |
-| root | [<code>MAryTreeNode</code>](#MAryTreeNode) | 
+| root | [<code>TreeNode</code>](#TreeNode) | 
 
-<a name="MAryTree+leftDescendantTraversal"></a>
+<a name="Tree+leftDescendantTraversal"></a>
 
-### mAryTree.leftDescendantTraversal(root)
+### tree.leftDescendantTraversal(root)
 <p>Generates left-descendant nodes</p>
 
-**Kind**: instance method of [<code>MAryTree</code>](#MAryTree)  
+**Kind**: instance method of [<code>Tree</code>](#Tree)  
 
 | Param | Type |
 | --- | --- |
-| root | [<code>MAryTreeNode</code>](#MAryTreeNode) | 
+| root | [<code>TreeNode</code>](#TreeNode) | 
 
-<a name="MAryTree+leftMostDescendant"></a>
+<a name="Tree+leftMostDescendant"></a>
 
-### mAryTree.leftMostDescendant(root, depth) ⇒ [<code>MAryTreeNode</code>](#MAryTreeNode) \| <code>null</code>
+### tree.leftMostDescendant(root, depth) ⇒ [<code>TreeNode</code>](#TreeNode) \| <code>null</code>
 <p>Return left most descendent for a node.</p>
 <p>The left-most descendent is defined as the left most node in the sub-tree at given depth.</p>
 
-**Kind**: instance method of [<code>MAryTree</code>](#MAryTree)  
+**Kind**: instance method of [<code>Tree</code>](#Tree)  
 
 | Param | Type | Default |
 | --- | --- | --- |
-| root | [<code>MAryTreeNode</code>](#MAryTreeNode) |  | 
+| root | [<code>TreeNode</code>](#TreeNode) |  | 
 | depth | <code>number</code> | <code>0</code> | 
 
-<a name="MAryTree+connectLeftNeighbor"></a>
+<a name="Tree+connectLeftNeighbor"></a>
 
-### mAryTree.connectLeftNeighbor()
+### tree.connectLeftNeighbor()
 <p>Perform a breadth-first traversal and connect all left neighbors by setting
-MAryTreeNode.leftNeighbor.</p>
+TreeNode.leftNeighbor.</p>
 <p>The left neighbor is defined as being to the left in the same row, but not part
 of the same sub-tree as this nodes parent.</p>
 
-**Kind**: instance method of [<code>MAryTree</code>](#MAryTree)  
-<a name="MAryTree+insert"></a>
+**Kind**: instance method of [<code>Tree</code>](#Tree)  
+<a name="Tree+insert"></a>
 
-### mAryTree.insert(parentNodeKey, key, value) ⇒ [<code>MAryTreeNode</code>](#MAryTreeNode) \| <code>null</code>
+### tree.insert(parentNodeKey, key, value) ⇒ [<code>TreeNode</code>](#TreeNode) \| <code>null</code>
 <p>Insert a new child node at the given parent key.</p>
 
-**Kind**: instance method of [<code>MAryTree</code>](#MAryTree)  
+**Kind**: instance method of [<code>Tree</code>](#Tree)  
 
 | Param | Type |
 | --- | --- |
-| parentNodeKey | <code>MAryTreeKey</code> | 
-| key | <code>MAryTreeKey</code> | 
-| value | <code>MAryTreeValue</code> | 
+| parentNodeKey | <code>TreeKey</code> | 
+| key | <code>TreeKey</code> | 
+| value | <code>TreeValue</code> | 
 
-<a name="MAryTree+remove"></a>
+<a name="Tree+remove"></a>
 
-### mAryTree.remove(key) ⇒ <code>boolean</code>
+### tree.remove(key) ⇒ <code>boolean</code>
 <p>Remove a given node by its key</p>
 
-**Kind**: instance method of [<code>MAryTree</code>](#MAryTree)  
+**Kind**: instance method of [<code>Tree</code>](#Tree)  
 **Returns**: <code>boolean</code> - <p>true if the node was found, false if it was not found.</p>  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| key | <code>MAryTreeKey</code> | <p>the tree key to remove</p> |
+| key | <code>TreeKey</code> | <p>the tree key to remove</p> |
 
-<a name="MAryTree+find"></a>
+<a name="Tree+find"></a>
 
-### mAryTree.find(key) ⇒ [<code>MAryTreeNode</code>](#MAryTreeNode) \| <code>null</code>
+### tree.find(key) ⇒ [<code>TreeNode</code>](#TreeNode) \| <code>null</code>
 <p>Find a node by supplying its key.</p>
 
-**Kind**: instance method of [<code>MAryTree</code>](#MAryTree)  
+**Kind**: instance method of [<code>Tree</code>](#Tree)  
 
 | Param |
 | --- |
 | key | 
 
-<a name="MAryTree+depth"></a>
+<a name="Tree+depth"></a>
 
-### mAryTree.depth(node) ⇒ <code>number</code>
+### tree.depth(node) ⇒ <code>number</code>
 <p>Return depth of a node.</p>
 
-**Kind**: instance method of [<code>MAryTree</code>](#MAryTree)  
+**Kind**: instance method of [<code>Tree</code>](#Tree)  
 
 | Param | Type |
 | --- | --- |
-| node | [<code>MAryTreeNode</code>](#MAryTreeNode) | 
+| node | [<code>TreeNode</code>](#TreeNode) | 
 
-<a name="MAryTree+height"></a>
+<a name="Tree+height"></a>
 
-### mAryTree.height(node) ⇒ <code>number</code>
+### tree.height(node) ⇒ <code>number</code>
 <p>Return the height of a node.</p>
 
-**Kind**: instance method of [<code>MAryTree</code>](#MAryTree)  
+**Kind**: instance method of [<code>Tree</code>](#Tree)  
 
 | Param | Type |
 | --- | --- |
-| node | [<code>MAryTreeNode</code>](#MAryTreeNode) | 
+| node | [<code>TreeNode</code>](#TreeNode) | 
 
-<a name="MAryTree.root"></a>
+<a name="Tree.root"></a>
 
-### MAryTree.root : [<code>MAryTreeNode</code>](#MAryTreeNode)
+### Tree.root : [<code>TreeNode</code>](#TreeNode)
 <p>reference to the tree's root node</p>
 
-**Kind**: static property of [<code>MAryTree</code>](#MAryTree)  
-<a name="MAryTree.options"></a>
+**Kind**: static property of [<code>Tree</code>](#Tree)  
+<a name="Tree.options"></a>
 
-### MAryTree.options : <code>MAryTreeOptions</code>
+### Tree.options : <code>TreeOptions</code>
 <p>stored options passed in on object construction</p>
 
-**Kind**: static property of [<code>MAryTree</code>](#MAryTree)  
+**Kind**: static property of [<code>Tree</code>](#Tree)  
 <a name="calculateCoordinates"></a>
 
 ## calculateCoordinates()

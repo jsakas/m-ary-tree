@@ -1,43 +1,43 @@
-export type MAryTreeKey = string | number;
-export type MAryTreeValue = unknown;
-export type MAryTreeOptions = {
+export type TreeKey = string | number;
+export type TreeValue = unknown;
+export type TreeOptions = {
   maxChildren?: number;
 };
-export class MAryTreeNode<T = MAryTreeValue> {
+export class TreeNode<K = TreeKey, T = TreeValue> {
   /**
-   * @memberof MAryTreeNode
-   * @member {MAryTreeKey} key key for this node
+   * @memberof TreeNode
+   * @member {TreeKey} key key for this node
    */
-  key: MAryTreeKey;
+  key: K;
   /**
-   * @memberof MAryTreeNode
-   * @member {MAryTreeValue} value information stored on node
+   * @memberof TreeNode
+   * @member {TreeValue} value information stored on node
    */
   value?: T;
   /**
-   * @memberof MAryTreeNode
-   * @member {MAryTreeNode} parent reference to this nodes parent
+   * @memberof TreeNode
+   * @member {TreeNode} parent reference to this nodes parent
    */
-  parent: MAryTreeNode<T> | null;
+  parent: TreeNode<K, T> | null;
   /**
-   * @memberof MAryTreeNode
-   * @member {MAryTreeNode[]} children array of child nodes
+   * @memberof TreeNode
+   * @member {TreeNode[]} children array of child nodes
    */
-  children: MAryTreeNode<T>[];
+  children: TreeNode<K, T>[];
   /**
-   * @memberof MAryTreeNode
-   * @member {MAryTreeNode} leftNeighbor reference to this nodes left neighbor
+   * @memberof TreeNode
+   * @member {TreeNode} leftNeighbor reference to this nodes left neighbor
    */
-  leftNeighbor: MAryTreeNode<T> | null;
+  leftNeighbor: TreeNode<K, T> | null;
 
   /**
-   * MAryTreeNode constructor
+   * TreeNode constructor
    * 
-   * @param {MAryTreeKey} key 
-   * @param {MAryTreeValue} value 
-   * @param {(MAryTreeNode|null)} parent 
+   * @param {TreeKey} key 
+   * @param {TreeValue} value 
+   * @param {(TreeNode|null)} parent 
    */
-  constructor(key: MAryTreeKey, value: T, parent: MAryTreeNode<T> | null = null) {
+  constructor(key: K, value: T, parent: TreeNode<K, T> | null = null) {
     this.key = key;
     this.value = value;
     this.parent = parent;
@@ -50,7 +50,7 @@ export class MAryTreeNode<T = MAryTreeValue> {
       key: this.key,
       value: this.value,
       parent: this.parent?.key,
-      children: this.children.length,
+      children: this.children,
       leftNeighbor: this.leftNeighbor?.key,
     };
   }
@@ -58,10 +58,10 @@ export class MAryTreeNode<T = MAryTreeValue> {
   /**
    * Check if this node is a descendent of a parent.
    * 
-   * @param {MAryTreeNode} node the parent node to check against
+   * @param {TreeNode} node the parent node to check against
    * @returns {boolean}
    */
-  isDescendant(node? : MAryTreeNode<T>) : boolean {
+  isDescendant(node? : TreeNode<K, T>) : boolean {
     if (node === this.parent) {
       return true;
     }
@@ -103,9 +103,9 @@ export class MAryTreeNode<T = MAryTreeValue> {
 
   /**
    * Returns the left sibling of this node if it exists.
-   * @returns {(MAryTreeNode|null)} 
+   * @returns {(TreeNode|null)} 
    */
-  get leftSibling(): MAryTreeNode<T> | null {
+  get leftSibling(): TreeNode<K, T> | null {
     if (!this.parent) {
       return null;
     }
@@ -127,25 +127,25 @@ export class MAryTreeNode<T = MAryTreeValue> {
     }
   }
 }
-export class MAryTree<T = MAryTreeValue> {
+export class Tree<K = TreeKey, T = TreeValue> {
   /**
-   * @memberof MAryTree
-   * @member {MAryTreeNode} root reference to the tree's root node
+   * @memberof Tree
+   * @member {TreeNode} root reference to the tree's root node
    */
-  root: MAryTreeNode<T>;
+  root: TreeNode<K, T>;
   /**
-   * @memberof MAryTree
-   * @member {MAryTreeOptions} options stored options passed in on object construction 
+   * @memberof Tree
+   * @member {TreeOptions} options stored options passed in on object construction 
    */
-  options: MAryTreeOptions;
+  options: TreeOptions;
 
   /**
-   * @param {MAryTreeKey} key 
-   * @param {MAryTreeValue} value 
-   * @param {MAryTreeOptions} options 
+   * @param {TreeKey} key 
+   * @param {TreeValue} value 
+   * @param {TreeOptions} options 
    */
-  constructor(key: MAryTreeKey, value?: T, options: MAryTreeOptions = {}) {
-    this.root = new MAryTreeNode(key, value);
+  constructor(key: K, value?: T, options: TreeOptions = {}) {
+    this.root = new TreeNode<K, T>(key, value);
     this.options = options;
   }
 
@@ -153,10 +153,10 @@ export class MAryTree<T = MAryTreeValue> {
    * Generates nodes in an in-order traversal
    * 
    * @generator
-   * @param {MAryTreeNode} root 
-   * @yields {MAryTreeNode}
+   * @param {TreeNode} root 
+   * @yields {TreeNode}
    */
-  *inOrderTraversal(root: MAryTreeNode<T> = this.root): Generator<MAryTreeNode<T>> {
+  *inOrderTraversal(root: TreeNode<K, T> = this.root): Generator<TreeNode<K, T>> {
     const last = root.children && root.children[root.children?.length - 1];
 
     if (root.children.length > 0) {
@@ -181,10 +181,10 @@ export class MAryTree<T = MAryTreeValue> {
    * Generates nodes in a post-order traversal
    * 
    * @generator
-   * @param {MAryTreeNode} root 
-   * @yields {MAryTreeNode}
+   * @param {TreeNode} root 
+   * @yields {TreeNode}
    */
-  *postOrderTraversal(root: MAryTreeNode<T> = this.root): Generator<MAryTreeNode<T>> {
+  *postOrderTraversal(root: TreeNode<K, T> = this.root): Generator<TreeNode<K, T>> {
     if (root.children.length > 0) {
       for (const child of root.children) {
         yield* this.postOrderTraversal(child);
@@ -198,10 +198,10 @@ export class MAryTree<T = MAryTreeValue> {
    * Generates nodes in an pre-order traversal
    * 
    * @generator
-   * @param {MAryTreeNode} root 
-   * @yields {MAryTreeNode}
+   * @param {TreeNode} root 
+   * @yields {TreeNode}
    */
-  *preOrderTraversal(root = this.root): Generator<MAryTreeNode<T>> {
+  *preOrderTraversal(root = this.root): Generator<TreeNode<K, T>> {
     yield root;
 
     if (root.children.length > 0) {
@@ -215,10 +215,10 @@ export class MAryTree<T = MAryTreeValue> {
    * Generates nodes in an breadth-first traversal
    * 
    * @generator
-   * @param {MAryTreeNode} root 
-   * @yields {MAryTreeNode}
+   * @param {TreeNode} root 
+   * @yields {TreeNode}
    */
-  *breadthFirstTraversal(root = this.root): Generator<MAryTreeNode<T>> {
+  *breadthFirstTraversal(root = this.root): Generator<TreeNode<K, T>> {
     const collection = [root];
 
     while (collection.length) {
@@ -240,10 +240,10 @@ export class MAryTree<T = MAryTreeValue> {
    * Generates nodes at a single depth
    * 
    * @generator
-   * @param {MAryTreeNode} root 
-   * @yields {MAryTreeNode}
+   * @param {TreeNode} root 
+   * @yields {TreeNode}
    */
-  *rowTraversal(n: number): Generator<MAryTreeNode<T>> {
+  *rowTraversal(n: number): Generator<TreeNode<K, T>> {
     if (n > this.height()) {
       return;
     }
@@ -263,10 +263,10 @@ export class MAryTree<T = MAryTreeValue> {
    * Generates left-sibling nodes
    * 
    * @generator
-   * @param {MAryTreeNode} root 
-   * @yields {MAryTreeNode}
+   * @param {TreeNode} root 
+   * @yields {TreeNode}
    */
-  *leftSiblingTraversal(node : MAryTreeNode<T>) : Generator<MAryTreeNode<T>> {
+  *leftSiblingTraversal(node : TreeNode<K, T>) : Generator<TreeNode<K, T>> {
     let lf = node.leftSibling;
     while (lf) {
       yield lf;
@@ -279,10 +279,10 @@ export class MAryTree<T = MAryTreeValue> {
    * Generates left-descendant nodes
    * 
    * @generator
-   * @param {MAryTreeNode} root 
-   * @yields {MAryTreeNode}
+   * @param {TreeNode} root 
+   * @yields {TreeNode}
    */
-  *leftDescendantTraversal(node: MAryTreeNode<T>):  Generator<MAryTreeNode<T>> {
+  *leftDescendantTraversal(node: TreeNode<K, T>):  Generator<TreeNode<K, T>> {
     let depth = 1;
     let leftChild = this.leftMostDescendant(node, depth);
     while (leftChild) {
@@ -298,11 +298,11 @@ export class MAryTree<T = MAryTreeValue> {
    * 
    * The left-most descendent is defined as the left most node in the sub-tree at given depth. 
    * 
-   * @param {MAryTreeNode} root 
+   * @param {TreeNode} root 
    * @param {number} depth 
-   * @returns {(MAryTreeNode|null)}
+   * @returns {(TreeNode|null)}
    */
-  leftMostDescendant(root = this.root, depth = 0): MAryTreeNode<T> | null {
+  leftMostDescendant(root = this.root, depth = 0): TreeNode<K, T> | null {
     for (const node of this.breadthFirstTraversal(root)) {
 
       if (this.depth(node) - this.depth(root) === depth) {
@@ -315,7 +315,7 @@ export class MAryTree<T = MAryTreeValue> {
 
   /**
    * Perform a breadth-first traversal and connect all left neighbors by setting
-   * MAryTreeNode.leftNeighbor.
+   * TreeNode.leftNeighbor.
    * 
    * The left neighbor is defined as being to the left in the same row, but not part 
    * of the same sub-tree as this nodes parent.
@@ -337,16 +337,16 @@ export class MAryTree<T = MAryTreeValue> {
   /**
    * Insert a new child node at the given parent key.
    *  
-   * @param {MAryTreeKey} parentNodeKey
-   * @param {MAryTreeKey} key 
-   * @param {MAryTreeValue} value 
-   * @returns {(MAryTreeNode|null)}
+   * @param {TreeKey} parentNodeKey
+   * @param {TreeKey} key 
+   * @param {TreeValue} value 
+   * @returns {(TreeNode|null)}
    */
   insert(
-    parentNodeKey: MAryTreeKey,
-    key: MAryTreeKey,
-    value?: T,
-  ): MAryTreeNode<T> | null {
+    parentNodeKey: K,
+    key: K,
+    value?: T | Tree<K, T>,
+  ): TreeNode<K, T> | null {
     const parent = this.find(parentNodeKey);
 
     if (parent) {
@@ -356,10 +356,21 @@ export class MAryTree<T = MAryTreeValue> {
         throw new Error('Cannot insert child node: parent already has max children');
       }
 
-      const node = new MAryTreeNode(key, value, parent);
+      let node : TreeNode<K, T> | null = null;
 
+      if (value && 'root' in value) {
+        node = new TreeNode<K, T>(key, value.root.value, parent);
+
+        for (const child of value.root.children) {
+          child.parent = node;
+          node.children.push(child);
+        }
+      } else {
+        node = new TreeNode<K, T>(key, value as T, parent);
+      }
+      
       parent.children.push(node);
-
+  
       return node;
     }
 
@@ -369,10 +380,10 @@ export class MAryTree<T = MAryTreeValue> {
   /**
    * Remove a given node by its key
    * 
-   * @param {MAryTreeKey} key the tree key to remove
+   * @param {TreeKey} key the tree key to remove
    * @returns {boolean} true if the node was found, false if it was not found.
    */
-  remove(key: MAryTreeKey) : boolean {
+  remove(key: K) : boolean {
     for (const node of this.preOrderTraversal()) {
 
       if (node.key === key) {
@@ -391,9 +402,9 @@ export class MAryTree<T = MAryTreeValue> {
    * Find a node by supplying its key.
    * 
    * @param key 
-   * @returns {(MAryTreeNode|null)}
+   * @returns {(TreeNode|null)}
    */
-  find(key: MAryTreeKey) : MAryTreeNode<T> | null {
+  find(key: K) : TreeNode<K, T> | null {
     for (const node of this.preOrderTraversal()) {
       if (node.key === key) return node;
     }
@@ -404,10 +415,10 @@ export class MAryTree<T = MAryTreeValue> {
   /**
    * Return depth of a node.
    * 
-   * @param {MAryTreeNode} node 
+   * @param {TreeNode} node 
    * @returns {number}
    */
-  depth(node: MAryTreeNode = this.root): number {
+  depth(node: TreeNode<K, T> = this.root): number {
     if (node?.parent) {
       return this.depth(node.parent) + 1;
     }
@@ -418,10 +429,10 @@ export class MAryTree<T = MAryTreeValue> {
   /**
    * Return the height of a node.
    * 
-   * @param {MAryTreeNode} node 
+   * @param {TreeNode} node 
    * @returns {number}
    */
-  height(node: MAryTreeNode = this.root): number {
+  height(node: TreeNode<K, T> = this.root): number {
     if (node.children.length) {
       return Math.max(...node.children.map(c => this.height(c))) + 1;
     }
