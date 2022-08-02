@@ -13,7 +13,7 @@ export class TreeNode<K = TreeKey, T = TreeValue> {
    * @memberof TreeNode
    * @member {TreeValue} value information stored on node
    */
-  value?: T;
+  value: T;
   /**
    * @memberof TreeNode
    * @member {TreeNode} parent reference to this nodes parent
@@ -61,7 +61,7 @@ export class TreeNode<K = TreeKey, T = TreeValue> {
    * @param {TreeNode} node the parent node to check against
    * @returns {boolean}
    */
-  isDescendant(node? : TreeNode<K, T>) : boolean {
+  isDescendant(node : TreeNode<K, T> | null = null) : boolean {
     if (node === this.parent) {
       return true;
     }
@@ -266,7 +266,7 @@ export class Tree<K = TreeKey, T = TreeValue> {
    * @param {TreeNode} root 
    * @yields {TreeNode}
    */
-  *leftSiblingTraversal(node : TreeNode<K, T>) : Generator<TreeNode<K, T>> {
+  *leftSiblingTraversal(node : TreeNode<K, T> | null = null) : Generator<TreeNode<K, T>> {
     let lf = node.leftSibling;
     while (lf) {
       yield lf;
@@ -282,7 +282,7 @@ export class Tree<K = TreeKey, T = TreeValue> {
    * @param {TreeNode} root 
    * @yields {TreeNode}
    */
-  *leftDescendantTraversal(node: TreeNode<K, T>):  Generator<TreeNode<K, T>> {
+  *leftDescendantTraversal(node: TreeNode<K, T> | null = null):  Generator<TreeNode<K, T>> {
     let depth = 1;
     let leftChild = this.leftMostDescendant(node, depth);
     while (leftChild) {
@@ -302,7 +302,7 @@ export class Tree<K = TreeKey, T = TreeValue> {
    * @param {number} depth 
    * @returns {(TreeNode|null)}
    */
-  leftMostDescendant(root = this.root, depth = 0): TreeNode<K, T> | null {
+  leftMostDescendant(root : TreeNode<K, T> | null = this.root, depth = 0): TreeNode<K, T> | null {
     for (const node of this.breadthFirstTraversal(root)) {
 
       if (this.depth(node) - this.depth(root) === depth) {
@@ -418,7 +418,7 @@ export class Tree<K = TreeKey, T = TreeValue> {
    * @param {TreeNode} node 
    * @returns {number}
    */
-  depth(node: TreeNode<K, T> = this.root): number {
+  depth(node: TreeNode<K, T> | null = this.root): number {
     if (node?.parent) {
       return this.depth(node.parent) + 1;
     }
@@ -432,7 +432,7 @@ export class Tree<K = TreeKey, T = TreeValue> {
    * @param {TreeNode} node 
    * @returns {number}
    */
-  height(node: TreeNode<K, T> = this.root): number {
+  height(node: TreeNode<K, T> | null = this.root): number {
     if (node.children.length) {
       return Math.max(...node.children.map(c => this.height(c))) + 1;
     }
