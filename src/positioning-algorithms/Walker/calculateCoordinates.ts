@@ -1,12 +1,17 @@
 
-import { Tree, TreeKey, TreeNode } from './MAryTree';
+/** 
+ * This is the algorithm described in "Node-Positioning Algorithm for General Trees" by John Q. Walker
+ * 
+ * Reference: https://www.cs.unc.edu/techreports/89-034.pdf
+ */
+import { Tree, TreeKey, TreeNode } from '../../MAryTree';
 
 export type TreeValuePositioned<T = unknown> = {
   x?: number;
   y?: number;
   prelimX?: number;
   modifier?: number;
-  data: T;
+  data?: T;
 };
 
 export type CalculateCoordinatesOptions = {
@@ -16,14 +21,6 @@ export type CalculateCoordinatesOptions = {
   nodeSpacingY?: number;
 };
 
-/**
- * Perform multiple traversals to calculate and store the x, y coordinates for each node
- * based on the node width and spacing options.
- * 
- * This is the core algorithm described in Node-Positioning Algorithm for General Trees by John Q. Walker
- * 
- * Reference: [https://www.cs.unc.edu/techreports/89-034.pdf](https://www.cs.unc.edu/techreports/89-034.pdf)
- */
 export default function calculateCoordinates<K = TreeKey>(tree: Tree<K, TreeValuePositioned>, options : CalculateCoordinatesOptions = {}) {
   const {
     nodeWidth = 2,
@@ -37,7 +34,10 @@ export default function calculateCoordinates<K = TreeKey>(tree: Tree<K, TreeValu
   for (const node of tree.postOrderTraversal()) {
     if (!node.value) {
       node.value = {
-        data: undefined,
+        x: 0,
+        y: 0,
+        prelimX: 0,
+        modifier: 0,
       };
     }
 

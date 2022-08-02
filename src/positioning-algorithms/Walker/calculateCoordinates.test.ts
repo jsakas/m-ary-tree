@@ -1,5 +1,5 @@
 import calculateCoordinates, { TreeValuePositioned } from "./calculateCoordinates";
-import { Tree } from "./MAryTree";
+import { Tree } from "../../MAryTree";
 
 
 describe('calculateCoordinates', () => {
