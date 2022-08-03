@@ -22,7 +22,7 @@ tree.insert(0, 2);
 Each node inserted should have a unique key. Values are optional.
 
 ```typescript
-const tree = new MAryTree(1);
+const tree = new MAryTree(0);
 
 tree.insert(0, 1)          // node with key 1 and no value
 tree.insert(0, 2, 'foo')   // node with key 2 and value foo
@@ -57,43 +57,44 @@ type MyNodeType = {
   data: string;
 }
 
-const tree = new MAryTree<number, MyNodeType>(0, { data: 'foo' });
+const tree = new Tree<number, MyNodeType>(0, { data: 'foo' });
+
+console.log(tree.root.value.data) // 'foo'
 ```
 
 ## Motivation
 
-This data structure was created while implementing the algorithm described in [Node-Positioning Algorithm for General Trees](https://www.cs.unc.edu/techreports/89-034.pdf) by John Q. Walker.
+This library was created while experimenting with tree drawing algorithms.
 
-Also included is a utility `calculateCoordinates` which will allow you calculate X and Y coordinates for trees following the program outlined in that paper.
+There are currently two positioning algorithms, based on these papers:
+
+- [Node-Positioning Algorithm for General Trees](https://www.cs.unc.edu/techreports/89-034.pdf) by John Q. Walker
+- [Drawing Non-layered Tidy Trees in Linear Time](https://core.ac.uk/download/pdf/301654972.pdf) by Atze van der Ploeg
+
 
 ```typescript
-import calculateCoordinates, { MAryTreeValuePositioned } from "m-ary-tree/dist/calculateCoordinates";
-import { MAryTree } from "m-ary-tree";
+import calculateCoordinates, { MAryTreeValuePositioned } from "m-ary-tree/dist/positioning-algorithms/Walker/calculateCoordinates";
+import { Tree } from "m-ary-tree";
 
-const tree = new MAryTree<string, MAryTreeValuePositioned>('O');
+const tree = new Tree<number, TreeValuePositioned>(0);
 
-tree.insert('O', 'E');
-tree.insert('O', 'F');
-tree.insert('O', 'N');
+tree.insert(0, 1);
+tree.insert(0, 2);
+tree.insert(0, 3);
 
-tree.insert('E', 'A');
-tree.insert('E', 'D');
-
-tree.insert('D', 'B');
-tree.insert('D', 'C');
-
-tree.insert('N', 'G');
-tree.insert('N', 'M');
-
-tree.insert('M', 'H');
-tree.insert('M', 'I');
-tree.insert('M', 'J');
-tree.insert('M', 'K');
-tree.insert('M', 'L');
-
-calculateCoordinates(tree);
+calculateCoordinates(tree, {
+  nodeWidth: 50,
+  nodeHeight: 50,
+  nodeSpacingX: 100,
+  nodeSpacingY: 30,
+});
 ```
 
-Each node will have `node.value.x` and `node.value.y` set accordingly. Drawing the above tree will produce the following:
+Nodes will have `node.value.x` and `node.value.y` set accordingly.
 
-![Walker's Tree](tree.png)
+### Walker's Tree
+
+![Walker's Tree](tree-walker.png)
+### Ploeg's Tree
+
+![Ploe's Tree](tree-ploeg.png)
