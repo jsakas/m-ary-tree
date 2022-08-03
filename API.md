@@ -7,16 +7,6 @@
 <dd></dd>
 </dl>
 
-## Functions
-
-<dl>
-<dt><a href="#calculateCoordinates">calculateCoordinates()</a></dt>
-<dd><p>Perform multiple traversals to calculate and store the x, y coordinates for each node
-based on the node width and spacing options.</p>
-<p>This is the core algorithm described in Node-Positioning Algorithm for General Trees by John Q. Walker</p>
-<p>Reference: <a href="https://www.cs.unc.edu/techreports/89-034.pdf">https://www.cs.unc.edu/techreports/89-034.pdf</a></p></dd>
-</dl>
-
 <a name="TreeNode"></a>
 
 ## TreeNode
@@ -80,9 +70,9 @@ based on the node width and spacing options.</p>
 
 **Kind**: instance method of [<code>TreeNode</code>](#TreeNode)  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| node | [<code>TreeNode</code>](#TreeNode) | <p>the parent node to check against</p> |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| node | [<code>TreeNode</code>](#TreeNode) | <code></code> | <p>the parent node to check against</p> |
 
 <a name="TreeNode.key"></a>
 
@@ -319,12 +309,3 @@ of the same sub-tree as this nodes parent.</p>
 <p>stored options passed in on object construction</p>
 
 **Kind**: static property of [<code>Tree</code>](#Tree)  
-<a name="calculateCoordinates"></a>
-
-## calculateCoordinates()
-<p>Perform multiple traversals to calculate and store the x, y coordinates for each node
-based on the node width and spacing options.</p>
-<p>This is the core algorithm described in Node-Positioning Algorithm for General Trees by John Q. Walker</p>
-<p>Reference: <a href="https://www.cs.unc.edu/techreports/89-034.pdf">https://www.cs.unc.edu/techreports/89-034.pdf</a></p>
-
-**Kind**: global function  
