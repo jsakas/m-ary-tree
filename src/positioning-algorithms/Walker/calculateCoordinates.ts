@@ -4,14 +4,14 @@
  * 
  * Reference: https://www.cs.unc.edu/techreports/89-034.pdf
  */
-import { Tree, TreeKey, TreeNode } from '../../MAryTree';
+import { Tree, TreeKey, TreeNode, TreeValue } from '../../MAryTree';
 
-export type TreeValuePositioned<T = unknown> = {
+export type TreeValuePositioned<V = TreeValue> = {
   x?: number;
   y?: number;
   prelimX?: number;
   modifier?: number;
-  data?: T;
+  data?: V;
 };
 
 export type CalculateCoordinatesOptions = {
@@ -21,7 +21,7 @@ export type CalculateCoordinatesOptions = {
   nodeSpacingY?: number;
 };
 
-export default function calculateCoordinates<K = TreeKey>(tree: Tree<K, TreeValuePositioned>, options : CalculateCoordinatesOptions = {}) {
+export default function calculateCoordinates<K, V>(tree: Tree<K, TreeValuePositioned<V>>, options: CalculateCoordinatesOptions = {}) {
   const {
     nodeWidth = 2,
     nodeSpacingX = 4,

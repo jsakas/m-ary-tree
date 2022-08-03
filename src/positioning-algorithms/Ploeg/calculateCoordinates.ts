@@ -4,24 +4,24 @@
  * 
  * Reference: https://core.ac.uk/download/pdf/301654972.pdf
  */
-import { Tree, TreeKey, TreeNode } from '../../MAryTree';
+import { Tree, TreeKey, TreeNode, TreeValue } from '../../MAryTree';
 
-export type TreeValuePositioned<K = TreeKey, T = Record<string, never>> = {
+export type TreeValuePositioned<K = TreeKey, V = TreeValue> = {
   width: number;
   height: number;
-  x: number;
-  y: number;
-  prelim: number;
-  mod: number;
-  shift: number;
-  change: number;
-  tl: TreeNode<K, TreeValuePositioned<K, T>> | null;
-  tr: TreeNode<K, TreeValuePositioned<K, T>> | null;
-  el: TreeNode<K, TreeValuePositioned<K, T>> | null;
-  er: TreeNode<K, TreeValuePositioned<K, T>> | null;
-  msel: number;
-  mser: number;
-  data: T;
+  x?: number;
+  y?: number;
+  prelim?: number;
+  mod?: number;
+  shift?: number;
+  change?: number;
+  tl?: TreeNode<K, TreeValuePositioned<K, V>> | null;
+  tr?: TreeNode<K, TreeValuePositioned<K, V>> | null;
+  el?: TreeNode<K, TreeValuePositioned<K, V>> | null;
+  er?: TreeNode<K, TreeValuePositioned<K, V>> | null;
+  msel?: number;
+  mser?: number;
+  data?: V;
 };
 
 export type CalculateCoordinatesOptions = {
@@ -50,15 +50,13 @@ export function updateIYL(minY: number, i: number, ih: IYL): IYL {
   return new IYL(minY, i, ih);
 }
 
-export default function calculateCoordinates<K = TreeKey>(tree: Tree<K, TreeValuePositioned<K, Record<string, never>>>, options: CalculateCoordinatesOptions = {}) {
+export default function calculateCoordinates<K, V>(tree: Tree<K, TreeValuePositioned<K, V>>, options: CalculateCoordinatesOptions = {}) {
   const {
     nodeSpacingX = 4,
     nodeSpacingY = 4,
   } = options;
 
-  /**
-   * First set the y value for each node
-   */
+  // Set initial y value for each node
   for (const node of tree.breadthFirstTraversal()) {
     const parentNode = node.parent;
 
@@ -67,38 +65,51 @@ export default function calculateCoordinates<K = TreeKey>(tree: Tree<K, TreeValu
     } else {
       node.value.y = 0;
     }
+
+    node.value.x = 0;
+    node.value.prelim = 0;
+    node.value.mod = 0;
+    node.value.shift = 0;
+    node.value.change = 0;
+    node.value.tl = null;
+    node.value.tr = null;
+    node.value.el = null;
+    node.value.er = null;
+    node.value.msel = 0;
+    node.value.mser = 0;
   }
 
-  function firstWalk(node: TreeNode<K, TreeValuePositioned<K, Record<string, never>>>) : void {
-    if(node.children.length == 0){ setExtremes(node); return; }
+  function firstWalk(node: TreeNode<K, TreeValuePositioned<K, V>>): void {
+    if (node.children.length == 0) { setExtremes(node); return; }
     firstWalk(node.children[0]);
     // Create siblings in contour minimal vertical coordinate and index list.}^
-    let ih =  updateIYL(bottom(node.children[0].value.el),0,null);                    
-    for(let i = 1; i < node.children.length; i++){
-       firstWalk(node.children[i]);
-       //Store lowest vertical coordinate while extreme nodes still point in current subtree.}^
-       const minY = bottom(node.children[i].value.er);                                
-       seperate(node,i,ih);
-       ih = updateIYL(minY,i,ih);                                     
+    let ih = updateIYL(bottom(node.children[0].value.el), 0, null);
+    for (let i = 1; i < node.children.length; i++) {
+      firstWalk(node.children[i]);
+      //Store lowest vertical coordinate while extreme nodes still point in current subtree.}^
+      const minY = bottom(node.children[i].value.er);
+      seperate(node, i, ih);
+      ih = updateIYL(minY, i, ih);
     }
     positionRoot(node);
     setExtremes(node);
   }
 
-  function setExtremes(node: TreeNode<K, TreeValuePositioned<K, Record<string, never>>>) {
-    if(node.children.length == 0){
-      node.value.el = node; 
+  function setExtremes(node: TreeNode<K, TreeValuePositioned<K, V>>) {
+    if (node.children.length == 0) {
+      node.value.el = node;
       node.value.er = node;
-      node.value.msel = node.value.mser = 0;
-   } else {
-      node.value.el = node.children[0].value.el; 
+      node.value.msel = 0;
+      node.value.mser = 0;
+    } else {
+      node.value.el = node.children[0].value.el;
       node.value.msel = node.children[0].value.msel;
-      node.value.er = node.children[node.children.length-1].value.er; 
-      node.value.mser = node.children[node.children.length-1].value.mser;
-   }
+      node.value.er = node.children[node.children.length - 1].value.er;
+      node.value.mser = node.children[node.children.length - 1].value.mser;
+    }
   }
 
-  function seperate(node: TreeNode<K, TreeValuePositioned<K, Record<string, never>>>, i: number, ih: IYL) {
+  function seperate(node: TreeNode<K, TreeValuePositioned<K, V>>, i: number, ih: IYL) {
     // Right contour node of left sibling and its sum of modifiers
     let sr = node.children[i - 1];
     let mssr = sr.value.mod;
@@ -152,57 +163,57 @@ export default function calculateCoordinates<K = TreeKey>(tree: Tree<K, TreeValu
     }
   }
 
-  function moveSubtree(node: TreeNode<K, TreeValuePositioned<K, Record<string, never>>>, i: number, si: number, dist: number) {
-      // Move subtree by changing mod.
-      node.children[i].value.mod += dist;
-      node.children[i].value.msel += dist;
-      node.children[i].value.mser += dist;
-    
-      distributeExtra(node, i, si, dist);
+  function moveSubtree(node: TreeNode<K, TreeValuePositioned<K, V>>, i: number, si: number, dist: number) {
+    // Move subtree by changing mod.
+    node.children[i].value.mod += dist;
+    node.children[i].value.msel += dist;
+    node.children[i].value.mser += dist;
+
+    distributeExtra(node, i, si, dist);
   }
 
-  function nextLeftContour(node: TreeNode<K, TreeValuePositioned<K, Record<string, never>>>) : TreeNode<K, TreeValuePositioned<K, Record<string, never>>> {
+  function nextLeftContour(node: TreeNode<K, TreeValuePositioned<K, V>>): TreeNode<K, TreeValuePositioned<K, V>> {
     return node.children.length == 0 ? node.value.tl : node.children[0];
   }
-  
-  function nextRightContour(node: TreeNode<K, TreeValuePositioned<K, Record<string, never>>>) : TreeNode<K, TreeValuePositioned<K, Record<string, never>>> {
+
+  function nextRightContour(node: TreeNode<K, TreeValuePositioned<K, V>>): TreeNode<K, TreeValuePositioned<K, V>> {
     return node.children.length == 0 ? node.value.tr : node.children[node.children.length - 1];
   }
 
-  function bottom(node: TreeNode<K, TreeValuePositioned<K, Record<string, never>>>) : number {
+  function bottom(node: TreeNode<K, TreeValuePositioned<K, V>>): number {
     return node.value.y + node.value.height;
   }
 
-  function setLeftThread(node: TreeNode<K, TreeValuePositioned<K, Record<string, never>>>, i: number, cl: TreeNode<K, TreeValuePositioned<K, Record<string, never>>>, modsumcl: number) : void {
+  function setLeftThread(node: TreeNode<K, TreeValuePositioned<K, V>>, i: number, cl: TreeNode<K, TreeValuePositioned<K, V>>, modsumcl: number): void {
     const li = node.children[0].value.el;
     li.value.tl = cl;
     // Change mod so that the sum of modifier after following thread is correct.}^  
     const diff = (modsumcl - cl.value.mod) - node.children[0].value.msel;
-    li.value.mod += diff; 
+    li.value.mod += diff;
     // Change preliminary x coordinate so that the node does not move.}^  
     li.value.prelim -= diff;
     // Update extreme node and its sum of modifiers.}^  
-    node.children[0].value.el = node.children[i].value.el; 
+    node.children[0].value.el = node.children[i].value.el;
     node.children[0].value.msel = node.children[i].value.msel;
   }
 
   // Symetrical to setLeftThread.
-  function setRightThread(node: TreeNode<K, TreeValuePositioned<K, Record<string, never>>>, i: number, sr: TreeNode<K, TreeValuePositioned<K, Record<string, never>>>, modsumsr: number) : void {
+  function setRightThread(node: TreeNode<K, TreeValuePositioned<K, V>>, i: number, sr: TreeNode<K, TreeValuePositioned<K, V>>, modsumsr: number): void {
     const ri = node.children[i].value.er;
     ri.value.tr = sr;
-    const diff = (modsumsr - sr.value.mod) - node.children[i].value.mser ;
-    ri.value.mod += diff; 
-    ri.value.prelim-=diff;
-    node.children[i].value.er = node.children[i-1].value.er; node.children[i].value.mser = node.children[i-1].value.mser;
+    const diff = (modsumsr - sr.value.mod) - node.children[i].value.mser;
+    ri.value.mod += diff;
+    ri.value.prelim -= diff;
+    node.children[i].value.er = node.children[i - 1].value.er; node.children[i].value.mser = node.children[i - 1].value.mser;
   }
 
-  function positionRoot(node: TreeNode<K, TreeValuePositioned<K, Record<string, never>>>) {
+  function positionRoot(node: TreeNode<K, TreeValuePositioned<K, V>>) {
     // Position root between children, taking into account their mod.
     node.value.prelim = (node.children[0].value.prelim + node.children[0].value.mod + node.children[node.children.length - 1].value.mod +
       node.children[node.children.length - 1].value.prelim + node.children[node.children.length - 1].value.width) / 2 - node.value.width / 2;
   }
 
-  function secondWalk(node: TreeNode<K, TreeValuePositioned<K, Record<string, never>>>, modsum: number) : void {
+  function secondWalk(node: TreeNode<K, TreeValuePositioned<K, V>>, modsum: number): void {
     modsum += node.value.mod;
     // Set absolute (non-relative) horizontal coordinate.
     node.value.x = node.value.prelim + modsum;
@@ -212,7 +223,7 @@ export default function calculateCoordinates<K = TreeKey>(tree: Tree<K, TreeValu
     }
   }
 
-  function distributeExtra(node: TreeNode<K, TreeValuePositioned<K, Record<string, never>>>, i : number, si: number, dist: number) : void {
+  function distributeExtra(node: TreeNode<K, TreeValuePositioned<K, V>>, i: number, si: number, dist: number): void {
     // Are there intermediate children?
     if (si != i - 1) {
       const nr = i - si;
@@ -222,10 +233,10 @@ export default function calculateCoordinates<K = TreeKey>(tree: Tree<K, TreeValu
     }
   }
 
-  function addChildSpacing(node: TreeNode<K, TreeValuePositioned<K, Record<string, never>>>) : void {
+  function addChildSpacing(node: TreeNode<K, TreeValuePositioned<K, V>>): void {
     let d = 0;
     let modsumdelta = 0;
-  
+
     for (let i = 0; i < node.children.length; i++) {
       d += node.children[i].value.shift;
       modsumdelta += d + node.children[i].value.change;
