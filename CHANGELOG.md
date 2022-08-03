@@ -1,3 +1,19 @@
+# [0.3.0](https://github.com/jsakas/m-ary-tree/compare/v0.2.0...v0.3.0) (2022-08-03)
+
+
+### Bug Fixes
+
+* default node arguments to null ([a2a7c19](https://github.com/jsakas/m-ary-tree/commit/a2a7c19f9eca1b8092185521bf612705ed47b0be))
+
+
+### Features
+
+* add exports for node.js ([ad90769](https://github.com/jsakas/m-ary-tree/commit/ad90769039ac3500ef2ad534c571d2407323855c))
+* implement non-layered tree algorithm described by Atze van der Ploeg ([7ca1cc8](https://github.com/jsakas/m-ary-tree/commit/7ca1cc8008b1e794132ad5a7c332b068a86ce42d))
+* improve type inference ([8251bc5](https://github.com/jsakas/m-ary-tree/commit/8251bc5cb3c6983bbf91a5d584ed10a9cdaaf2f7))
+
+
+
 # [0.2.0](https://github.com/jsakas/m-ary-tree/compare/v0.1.1...v0.2.0) (2022-06-14)
 
 
