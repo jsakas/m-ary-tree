@@ -8,8 +8,10 @@
     "target": "ES5",
     "sourceMap": true,
   },
-  "files": [
-    "src/MAryTree.ts",
-    "src/calculateCoordinates.ts"
+  "exclude": [
+    "src/**/*.test.ts"
+  ],
+  "include": [
+    "src/**/*.ts"
   ]
 }

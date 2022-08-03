@@ -1,5 +1,5 @@
 import calculateCoordinates, { TreeValuePositioned } from "./calculateCoordinates";
-import { Tree } from "./MAryTree";
+import { Tree } from "../../MAryTree";
 
 
 describe('calculateCoordinates', () => {
@@ -33,7 +33,7 @@ describe('calculateCoordinates', () => {
     expect(bt.find('D')?.value.x).toEqual(6);
     expect(bt.find('B')?.value.x).toEqual(3);
     expect(bt.find('C')?.value.x).toEqual(9);
-    
+
     // Note: In John Q. Walker's original algorithm, this is modified to 13.5
     // Our algorithm does not account for this offset
     //
