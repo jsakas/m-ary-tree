@@ -2,7 +2,19 @@
 
 An implementation of an [m-ary tree](https://en.wikipedia.org/wiki/M-ary_tree) in TypeScript.
 
+![npm](https://img.shields.io/npm/v/m-ary-tree?style=flat-square)
+
 ---
+
+## Install
+
+```bash
+yarn add m-ary-tree
+```
+
+```bash
+npm install m-ary-tree
+```
 
 ## Usage
 
@@ -97,4 +109,4 @@ Nodes will have `node.value.x` and `node.value.y` set accordingly.
 ![Walker's Tree](tree-walker.png)
 ### Ploeg's Tree
 
-![Ploe's Tree](tree-ploeg.png)
+![Ploeg's Tree](tree-ploeg.png)
