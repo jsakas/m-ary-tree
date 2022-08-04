@@ -13,7 +13,7 @@
 **Kind**: global class  
 
 * [TreeNode](#TreeNode)
-    * [new TreeNode(key, value, parent)](#new_TreeNode_new)
+    * [new TreeNode(key, data, parent)](#new_TreeNode_new)
     * _instance_
         * [.isLeaf](#TreeNode+isLeaf) ⇒ <code>boolean</code>
         * [.hasChildren](#TreeNode+hasChildren) ⇒ <code>boolean</code>
@@ -22,21 +22,21 @@
         * [.isDescendant(node)](#TreeNode+isDescendant) ⇒ <code>boolean</code>
     * _static_
         * [.key](#TreeNode.key) : <code>TreeKey</code>
-        * [.value](#TreeNode.value) : <code>TreeValue</code>
+        * [.data](#TreeNode.data) : <code>TreeData</code>
         * [.parent](#TreeNode.parent) : [<code>TreeNode</code>](#TreeNode)
         * [.children](#TreeNode.children) : [<code>Array.&lt;TreeNode&gt;</code>](#TreeNode)
         * [.leftNeighbor](#TreeNode.leftNeighbor) : [<code>TreeNode</code>](#TreeNode)
 
 <a name="new_TreeNode_new"></a>
 
-### new TreeNode(key, value, parent)
+### new TreeNode(key, data, parent)
 <p>TreeNode constructor</p>
 
 
 | Param | Type | Default |
 | --- | --- | --- |
 | key | <code>TreeKey</code> |  | 
-| value | <code>TreeValue</code> |  | 
+| data | <code>TreeData</code> |  | 
 | parent | [<code>TreeNode</code>](#TreeNode) \| <code>null</code> | <code></code> | 
 
 <a name="TreeNode+isLeaf"></a>
@@ -80,9 +80,9 @@
 <p>key for this node</p>
 
 **Kind**: static property of [<code>TreeNode</code>](#TreeNode)  
-<a name="TreeNode.value"></a>
+<a name="TreeNode.data"></a>
 
-### TreeNode.value : <code>TreeValue</code>
+### TreeNode.data : <code>TreeData</code>
 <p>information stored on node</p>
 
 **Kind**: static property of [<code>TreeNode</code>](#TreeNode)  
@@ -110,7 +110,7 @@
 **Kind**: global class  
 
 * [Tree](#Tree)
-    * [new Tree(key, value, options)](#new_Tree_new)
+    * [new Tree(key, data, options)](#new_Tree_new)
     * _instance_
         * [.inOrderTraversal(root)](#Tree+inOrderTraversal)
         * [.postOrderTraversal(root)](#Tree+postOrderTraversal)
@@ -121,7 +121,7 @@
         * [.leftDescendantTraversal(root)](#Tree+leftDescendantTraversal)
         * [.leftMostDescendant(root, depth)](#Tree+leftMostDescendant) ⇒ [<code>TreeNode</code>](#TreeNode) \| <code>null</code>
         * [.connectLeftNeighbor()](#Tree+connectLeftNeighbor)
-        * [.insert(parentNodeKey, key, value)](#Tree+insert) ⇒ [<code>TreeNode</code>](#TreeNode) \| <code>null</code>
+        * [.insert(parentNodeKey, key, data)](#Tree+insert) ⇒ [<code>TreeNode</code>](#TreeNode) \| <code>null</code>
         * [.remove(key)](#Tree+remove) ⇒ <code>boolean</code>
         * [.find(key)](#Tree+find) ⇒ [<code>TreeNode</code>](#TreeNode) \| <code>null</code>
         * [.depth(node)](#Tree+depth) ⇒ <code>number</code>
@@ -132,12 +132,12 @@
 
 <a name="new_Tree_new"></a>
 
-### new Tree(key, value, options)
+### new Tree(key, data, options)
 
 | Param | Type |
 | --- | --- |
 | key | <code>TreeKey</code> | 
-| value | <code>TreeValue</code> | 
+| data | <code>TreeData</code> | 
 | options | <code>TreeOptions</code> | 
 
 <a name="Tree+inOrderTraversal"></a>
@@ -241,7 +241,7 @@ of the same sub-tree as this nodes parent.</p>
 **Kind**: instance method of [<code>Tree</code>](#Tree)  
 <a name="Tree+insert"></a>
 
-### tree.insert(parentNodeKey, key, value) ⇒ [<code>TreeNode</code>](#TreeNode) \| <code>null</code>
+### tree.insert(parentNodeKey, key, data) ⇒ [<code>TreeNode</code>](#TreeNode) \| <code>null</code>
 <p>Insert a new child node at the given parent key.</p>
 
 **Kind**: instance method of [<code>Tree</code>](#Tree)  
@@ -250,7 +250,7 @@ of the same sub-tree as this nodes parent.</p>
 | --- | --- |
 | parentNodeKey | <code>TreeKey</code> | 
 | key | <code>TreeKey</code> | 
-| value | <code>TreeValue</code> | 
+| data | <code>TreeData</code> | 
 
 <a name="Tree+remove"></a>
 

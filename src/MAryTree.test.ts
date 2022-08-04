@@ -20,6 +20,46 @@ describe('Tree', () => {
     expect(() => bt.insert(1, 5)).toThrowError();
   });
 
+  it('can use primitives as data', () => {
+    const tree = new Tree<number, string>(0, 'foo');
+
+    expect(tree.root.data).toEqual('foo');
+  });
+
+  it('can use objects as data', () => {
+    const tree = new Tree<number, { foo: string }>(0, { foo: 'bar' });
+
+    expect(tree.root.data.foo).toEqual('bar');
+  });
+
+  it('can be converted to json', () => {
+    const tree = new Tree(0);
+
+    tree.insert(0, 1);
+    tree.insert(0, 2);
+
+    const json = JSON.stringify(tree);
+
+    expect(JSON.parse(json)).toEqual({ 
+      root: { 
+        key: 0, 
+        children: [
+          {
+            parent: 0,
+            key: 1,
+            children: []
+          },
+          {
+            parent: 0,
+            key: 2,
+            children: []
+          }
+        ] 
+      }, 
+      options: {} 
+    });
+  });
+
   it('can check descendents', () => {
     const bt = new Tree(1);
 

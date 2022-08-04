@@ -36,8 +36,8 @@ Each node inserted should have a unique key. Values are optional.
 ```typescript
 const tree = new MAryTree(0);
 
-tree.insert(0, 1)          // node with key 1 and no value
-tree.insert(0, 2, 'foo')   // node with key 2 and value foo
+tree.insert(0, 1)          // node with key 1 and no data
+tree.insert(0, 2, 'foo')   // node with key 2 and data foo
 ```
 
 ### Binary / Ternary Trees
@@ -65,30 +65,31 @@ for (const node of tree.postOrderTraversal()) {
 TypeScript generics are supported:
 
 ```typescript
-type MyNodeType = {
-  data: string;
-}
+type MyNodeType = string
 
 const tree = new Tree<number, MyNodeType>(0, { data: 'foo' });
 
-console.log(tree.root.value.data) // 'foo'
+console.log(tree.root.data) // 'foo'
 ```
 
 ## Motivation
 
 This library was created while experimenting with tree drawing algorithms.
 
-There are currently two positioning algorithms, based on these papers:
+There are currently two positioning algorithms implemented:
 
 - [Node-Positioning Algorithm for General Trees](https://www.cs.unc.edu/techreports/89-034.pdf) by John Q. Walker
 - [Drawing Non-layered Tidy Trees in Linear Time](https://core.ac.uk/download/pdf/301654972.pdf) by Atze van der Ploeg
 
+### Walker's Tree
+
+In this implementation all nodes must be the same width and height.
 
 ```typescript
-import calculateCoordinates, { MAryTreeValuePositioned } from "m-ary-tree/dist/positioning-algorithms/Walker/calculateCoordinates";
+import calculateCoordinates from "m-ary-tree/dist/positioning-algorithms/Walker/calculateCoordinates";
 import { Tree } from "m-ary-tree";
 
-const tree = new Tree<number, TreeValuePositioned>(0);
+const tree = new Tree<number>(0);
 
 tree.insert(0, 1);
 tree.insert(0, 2);
@@ -100,13 +101,49 @@ calculateCoordinates(tree, {
   nodeSpacingX: 100,
   nodeSpacingY: 30,
 });
+
+const positionedTree = calculateCoordinates(tree);
+
+for (const node of positionedTree.preOrderTraversal()) {
+  expect(typeof node.data.x).toBe('number')
+  expect(typeof node.data.y).toBe('number')
+  expect(typeof node.data.width).toBe('number')
+  expect(typeof node.data.height).toBe('number')
+}
 ```
 
-Nodes will have `node.value.x` and `node.value.y` set accordingly.
-
-### Walker's Tree
-
-![Walker's Tree](tree-walker.png)
 ### Ploeg's Tree
 
-![Ploeg's Tree](tree-ploeg.png)
+In this implementation all nodes can be different sizes.
+
+```typescript
+import calculateCoordinates from "m-ary-tree/dist/positioning-algorithms/Walker/calculateCoordinates";
+import { Tree } from "m-ary-tree";
+
+const tree = new Tree(0, {
+  width: 60,
+  height: 25,
+});
+
+tree.insert(0, 1, {
+  width: 50,
+  height: 20,
+});
+
+tree.insert(0, 2, {
+  width: 50,
+  height: 60,
+});
+
+const positionedTree = calculateCoordinates(tree, {
+  nodeSpacingX: 100,
+  nodeSpacingY: 30,
+});
+
+for (const node of positionedTree.preOrderTraversal()) {
+  expect(typeof node.data.x).toBe('number')
+  expect(typeof node.data.y).toBe('number')
+  expect(typeof node.data.width).toBe('number')
+  expect(typeof node.data.height).toBe('number')
+}
+```
