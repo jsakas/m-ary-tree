@@ -1,3 +1,8 @@
+## [0.4.1](https://github.com/jsakas/m-ary-tree/compare/v0.4.0...v0.4.1) (2022-08-04)
+
+* documentation update only
+  ([c1c8d8f](https://github.com/jsakas/m-ary-tree/commit/c1c8d8fd055c37f69deea1077b476138d36325eb))
+
 # [0.4.0](https://github.com/jsakas/m-ary-tree/compare/v0.3.0...v0.4.0) (2022-08-04)
 
 
