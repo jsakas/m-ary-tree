@@ -1,3 +1,12 @@
+# [0.4.0](https://github.com/jsakas/m-ary-tree/compare/v0.3.0...v0.4.0) (2022-08-04)
+
+
+### Features
+
+* refactor data attribute on nodes ([a1752c9](https://github.com/jsakas/m-ary-tree/commit/a1752c95c315b79bad6eb81c6a968630c0acab31))
+
+
+
 # [0.3.0](https://github.com/jsakas/m-ary-tree/compare/v0.2.0...v0.3.0) (2022-08-03)
 
 
