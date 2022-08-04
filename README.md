@@ -23,7 +23,9 @@ For detailed use see the [API Documentation](./API.md)
 ### Basic
 
 ```typescript
-const tree = new MAryTree(0);
+import { Tree } from 'm-ary-tree';
+
+const tree = new Tree(0);
 
 tree.insert(0, 1);
 tree.insert(0, 2);
@@ -34,7 +36,9 @@ tree.insert(0, 2);
 Each node inserted should have a unique key. Values are optional.
 
 ```typescript
-const tree = new MAryTree(0);
+import { Tree } from 'm-ary-tree';
+
+const tree = new Tree(0);
 
 tree.insert(0, 1)          // node with key 1 and no data
 tree.insert(0, 2, 'foo')   // node with key 2 and data foo
@@ -45,7 +49,7 @@ tree.insert(0, 2, 'foo')   // node with key 2 and data foo
 Use `maxChildren` option to limit child nodes, thus producing binary or ternary trees etc.
 
 ```typescript
-const tree = new MAryTree(1, null, {
+const tree = new Tree(1, null, {
   maxChildren: 2,
 });
 ```
@@ -86,8 +90,8 @@ There are currently two positioning algorithms implemented:
 In this implementation all nodes must be the same width and height.
 
 ```typescript
-import calculateCoordinates from "m-ary-tree/dist/positioning-algorithms/Walker/calculateCoordinates";
-import { Tree } from "m-ary-tree";
+import calculateCoordinates from 'm-ary-tree/dist/positioning-algorithms/Walker/calculateCoordinates';
+import { Tree } from 'm-ary-tree';
 
 const tree = new Tree<number>(0);
 
@@ -117,8 +121,8 @@ for (const node of positionedTree.preOrderTraversal()) {
 In this implementation all nodes can be different sizes.
 
 ```typescript
-import calculateCoordinates from "m-ary-tree/dist/positioning-algorithms/Walker/calculateCoordinates";
-import { Tree } from "m-ary-tree";
+import calculateCoordinates from 'm-ary-tree/dist/positioning-algorithms/Walker/calculateCoordinates';
+import { Tree } from 'm-ary-tree';
 
 const tree = new Tree(0, {
   width: 60,
