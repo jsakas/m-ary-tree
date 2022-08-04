@@ -4,14 +4,15 @@
  * 
  * Reference: https://www.cs.unc.edu/techreports/89-034.pdf
  */
-import { Tree, TreeKey, TreeNode, TreeValue } from '../../MAryTree';
+import { Tree, TreeKey, TreeNode, TreeData } from '../../MAryTree';
 
-export type TreeValuePositioned<V = TreeValue> = {
+export type TreeDataPositioned<D = TreeData> = D & {
   x?: number;
   y?: number;
+  width?: number;
+  height?: number;
   prelimX?: number;
   modifier?: number;
-  data?: V;
 };
 
 export type CalculateCoordinatesOptions = {
@@ -21,7 +22,7 @@ export type CalculateCoordinatesOptions = {
   nodeSpacingY?: number;
 };
 
-export default function calculateCoordinates<K, V>(tree: Tree<K, TreeValuePositioned<V>>, options: CalculateCoordinatesOptions = {}) {
+export default function calculateCoordinates<K, D extends TreeDataPositioned>(tree: Tree<K, D>, options: CalculateCoordinatesOptions = {}) : Tree<K, TreeDataPositioned<D>> {
   const {
     nodeWidth = 2,
     nodeSpacingX = 4,
@@ -31,34 +32,33 @@ export default function calculateCoordinates<K, V>(tree: Tree<K, TreeValuePositi
 
   tree.connectLeftNeighbor();
 
-  for (const node of tree.postOrderTraversal()) {
-    if (!node.value) {
-      node.value = {
-        x: 0,
-        y: 0,
-        prelimX: 0,
-        modifier: 0,
-      };
+  for (const node of (tree as unknown as Tree<K, TreeDataPositioned<D>>).postOrderTraversal()) {
+    if (!node.data) {
+      node.data = {} as TreeDataPositioned<D>;
     }
 
-    node.value.prelimX = 0;
-    node.value.modifier = 0;
+    node.data.x = 0;
+    node.data.y = 0;
+    node.data.prelimX = 0;
+    node.data.modifier = 0;
+    node.data.width = nodeWidth;
+    node.data.height = nodeHeight;
 
     if (node.leftSibling) {
-      node.value.prelimX = nodeWidth + nodeSpacingX;
+      node.data.prelimX = nodeWidth + nodeSpacingX;
 
       if (node.leftSibling) {
-        node.value.prelimX += node.leftSibling.value.prelimX;
+        node.data.prelimX += node.leftSibling.data.prelimX;
       }
 
       if (node.hasChildren) {
-        node.value.modifier = node.value.prelimX - (node.children[0].value.prelimX + node.children[node.children.length - 1].value.prelimX) / 2;
+        node.data.modifier = node.data.prelimX - (node.children[0].data.prelimX + node.children[node.children.length - 1].data.prelimX) / 2;
       }
     }
 
     if (!node.leftSibling) {
       if (node.hasChildren) {
-        node.value.prelimX = (node.children[0].value.prelimX + node.children[node.children.length - 1].value.prelimX) / 2;
+        node.data.prelimX = (node.children[0].data.prelimX + node.children[node.children.length - 1].data.prelimX) / 2;
       }
     }
 
@@ -73,8 +73,8 @@ export default function calculateCoordinates<K, V>(tree: Tree<K, TreeValuePositi
           if (diff < (nodeWidth + nodeSpacingX)) {
             const adjustment = nodeWidth + nodeSpacingX - diff;
 
-            node.value.prelimX += adjustment;
-            node.value.modifier += adjustment;
+            node.data.prelimX += adjustment;
+            node.data.modifier += adjustment;
           }
         }
       }
@@ -82,9 +82,11 @@ export default function calculateCoordinates<K, V>(tree: Tree<K, TreeValuePositi
   }
 
   for (const node of tree.preOrderTraversal()) {
-    node.value.x = calculateX(node);
-    node.value.y = (nodeSpacingY + nodeHeight) * tree.depth(node);
+    node.data.x = calculateX(node);
+    node.data.y = (nodeSpacingY + nodeHeight) * tree.depth(node);
   }
+
+  return tree;
 }
 
 /**
@@ -96,13 +98,13 @@ export default function calculateCoordinates<K, V>(tree: Tree<K, TreeValuePositi
  * @param {TreeNode} node 
  * @returns {number}
  */
-function calculateX<K = TreeKey>(node: TreeNode<K, TreeValuePositioned>): number {
-  let x = node.value.prelimX;
+function calculateX<K = TreeKey>(node: TreeNode<K, TreeDataPositioned>): number {
+  let x = node.data.prelimX;
 
   let parent = node.parent;
 
   while (parent) {
-    x += parent.value?.modifier || 0;
+    x += parent.data?.modifier || 0;
     parent = parent.parent;
   }
 

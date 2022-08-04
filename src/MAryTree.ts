@@ -1,9 +1,9 @@
 export type TreeKey = string | number;
-export type TreeValue = unknown;
+export type TreeData = { [key: string] : unknown };
 export type TreeOptions = {
   maxChildren?: number;
 };
-export class TreeNode<K = TreeKey, T = TreeValue> {
+export class TreeNode<K = TreeKey, D = TreeData> {
   /**
    * @memberof TreeNode
    * @member {TreeKey} key key for this node
@@ -11,35 +11,35 @@ export class TreeNode<K = TreeKey, T = TreeValue> {
   key: K;
   /**
    * @memberof TreeNode
-   * @member {TreeValue} value information stored on node
+   * @member {TreeData} data information stored on node
    */
-  value: T;
+  data: D;
   /**
    * @memberof TreeNode
    * @member {TreeNode} parent reference to this nodes parent
    */
-  parent: TreeNode<K, T> | null;
+  parent: TreeNode<K, D> | null;
   /**
    * @memberof TreeNode
    * @member {TreeNode[]} children array of child nodes
    */
-  children: TreeNode<K, T>[];
+  children: TreeNode<K, D>[];
   /**
    * @memberof TreeNode
    * @member {TreeNode} leftNeighbor reference to this nodes left neighbor
    */
-  leftNeighbor: TreeNode<K, T> | null;
+  leftNeighbor: TreeNode<K, D> | null;
 
   /**
    * TreeNode constructor
    * 
    * @param {TreeKey} key 
-   * @param {TreeValue} value 
+   * @param {TreeData} data 
    * @param {(TreeNode|null)} parent 
    */
-  constructor(key: K, value: T, parent: TreeNode<K, T> | null = null) {
+  constructor(key: K, data: D, parent: TreeNode<K, D> | null = null) {
     this.key = key;
-    this.value = value;
+    this.data = data;
     this.parent = parent;
     this.children = [];
     this.leftNeighbor = null;
@@ -48,7 +48,7 @@ export class TreeNode<K = TreeKey, T = TreeValue> {
   toJSON() {
     return {
       key: this.key,
-      value: this.value,
+      data: this.data,
       parent: this.parent?.key,
       children: this.children,
       leftNeighbor: this.leftNeighbor?.key,
@@ -61,7 +61,7 @@ export class TreeNode<K = TreeKey, T = TreeValue> {
    * @param {TreeNode} node the parent node to check against
    * @returns {boolean}
    */
-  isDescendant(node: TreeNode<K, T> | null = null): boolean {
+  isDescendant(node: TreeNode<K, D> | null = null): boolean {
     if (node === this.parent) {
       return true;
     }
@@ -105,7 +105,7 @@ export class TreeNode<K = TreeKey, T = TreeValue> {
    * Returns the left sibling of this node if it exists.
    * @returns {(TreeNode|null)} 
    */
-  get leftSibling(): TreeNode<K, T> | null {
+  get leftSibling(): TreeNode<K, D> | null {
     if (!this.parent) {
       return null;
     }
@@ -127,12 +127,12 @@ export class TreeNode<K = TreeKey, T = TreeValue> {
     }
   }
 }
-export class Tree<K = TreeKey, T = TreeValue> {
+export class Tree<K = TreeKey, D = TreeData> {
   /**
    * @memberof Tree
    * @member {TreeNode} root reference to the tree's root node
    */
-  root: TreeNode<K, T>;
+  root: TreeNode<K, D>;
   /**
    * @memberof Tree
    * @member {TreeOptions} options stored options passed in on object construction 
@@ -141,11 +141,11 @@ export class Tree<K = TreeKey, T = TreeValue> {
 
   /**
    * @param {TreeKey} key 
-   * @param {TreeValue} value 
+   * @param {TreeData} data 
    * @param {TreeOptions} options 
    */
-  constructor(key: K, value?: T, options: TreeOptions = {}) {
-    this.root = new TreeNode<K, T>(key, value);
+  constructor(key: K, data?: D, options: TreeOptions = {}) {
+    this.root = new TreeNode<K, D>(key, data);
     this.options = options;
   }
 
@@ -156,7 +156,7 @@ export class Tree<K = TreeKey, T = TreeValue> {
    * @param {TreeNode} root 
    * @yields {TreeNode}
    */
-  *inOrderTraversal(root: TreeNode<K, T> = this.root): Generator<TreeNode<K, T>> {
+  *inOrderTraversal(root: TreeNode<K, D> = this.root): Generator<TreeNode<K, D>> {
     const last = root.children && root.children[root.children?.length - 1];
 
     if (root.children.length > 0) {
@@ -184,7 +184,7 @@ export class Tree<K = TreeKey, T = TreeValue> {
    * @param {TreeNode} root 
    * @yields {TreeNode}
    */
-  *postOrderTraversal(root: TreeNode<K, T> = this.root): Generator<TreeNode<K, T>> {
+  *postOrderTraversal(root: TreeNode<K, D> = this.root): Generator<TreeNode<K, D>> {
     if (root.children.length > 0) {
       for (const child of root.children) {
         yield* this.postOrderTraversal(child);
@@ -201,7 +201,7 @@ export class Tree<K = TreeKey, T = TreeValue> {
    * @param {TreeNode} root 
    * @yields {TreeNode}
    */
-  *preOrderTraversal(root = this.root): Generator<TreeNode<K, T>> {
+  *preOrderTraversal(root = this.root): Generator<TreeNode<K, D>> {
     yield root;
 
     if (root.children.length > 0) {
@@ -218,7 +218,7 @@ export class Tree<K = TreeKey, T = TreeValue> {
    * @param {TreeNode} root 
    * @yields {TreeNode}
    */
-  *breadthFirstTraversal(root = this.root): Generator<TreeNode<K, T>> {
+  *breadthFirstTraversal(root = this.root): Generator<TreeNode<K, D>> {
     const collection = [root];
 
     while (collection.length) {
@@ -243,7 +243,7 @@ export class Tree<K = TreeKey, T = TreeValue> {
    * @param {TreeNode} root 
    * @yields {TreeNode}
    */
-  *rowTraversal(n: number): Generator<TreeNode<K, T>> {
+  *rowTraversal(n: number): Generator<TreeNode<K, D>> {
     if (n > this.height()) {
       return;
     }
@@ -266,7 +266,7 @@ export class Tree<K = TreeKey, T = TreeValue> {
    * @param {TreeNode} root 
    * @yields {TreeNode}
    */
-  *leftSiblingTraversal(node: TreeNode<K, T> | null = null): Generator<TreeNode<K, T>> {
+  *leftSiblingTraversal(node: TreeNode<K, D> | null = null): Generator<TreeNode<K, D>> {
     let lf = node.leftSibling;
     while (lf) {
       yield lf;
@@ -282,7 +282,7 @@ export class Tree<K = TreeKey, T = TreeValue> {
    * @param {TreeNode} root 
    * @yields {TreeNode}
    */
-  *leftDescendantTraversal(node: TreeNode<K, T> | null = null): Generator<TreeNode<K, T>> {
+  *leftDescendantTraversal(node: TreeNode<K, D> | null = null): Generator<TreeNode<K, D>> {
     let depth = 1;
     let leftChild = this.leftMostDescendant(node, depth);
     while (leftChild) {
@@ -302,7 +302,7 @@ export class Tree<K = TreeKey, T = TreeValue> {
    * @param {number} depth 
    * @returns {(TreeNode|null)}
    */
-  leftMostDescendant(root: TreeNode<K, T> | null = this.root, depth = 0): TreeNode<K, T> | null {
+  leftMostDescendant(root: TreeNode<K, D> | null = this.root, depth = 0): TreeNode<K, D> | null {
     for (const node of this.breadthFirstTraversal(root)) {
 
       if (this.depth(node) - this.depth(root) === depth) {
@@ -339,14 +339,14 @@ export class Tree<K = TreeKey, T = TreeValue> {
    *  
    * @param {TreeKey} parentNodeKey
    * @param {TreeKey} key 
-   * @param {TreeValue} value 
+   * @param {TreeData} data 
    * @returns {(TreeNode|null)}
    */
   insert(
     parentNodeKey: K,
     key: K,
-    value?: T | Tree<K, T>,
-  ): TreeNode<K, T> | null {
+    data?: D | Tree<K, D>,
+  ): TreeNode<K, D> | null {
     const parent = this.find(parentNodeKey);
 
     if (parent) {
@@ -356,17 +356,17 @@ export class Tree<K = TreeKey, T = TreeValue> {
         throw new Error('Cannot insert child node: parent already has max children');
       }
 
-      let node: TreeNode<K, T> | null = null;
+      let node: TreeNode<K, D> | null = null;
 
-      if (value && 'root' in value) {
-        node = new TreeNode<K, T>(key, value.root.value, parent);
+      if (data && 'root' in data) {
+        node = new TreeNode<K, D>(key, data.root.data, parent);
 
-        for (const child of value.root.children) {
+        for (const child of data.root.children) {
           child.parent = node;
           node.children.push(child);
         }
       } else {
-        node = new TreeNode<K, T>(key, value as T, parent);
+        node = new TreeNode<K, D>(key, data as D, parent);
       }
 
       parent.children.push(node);
@@ -404,7 +404,7 @@ export class Tree<K = TreeKey, T = TreeValue> {
    * @param key 
    * @returns {(TreeNode|null)}
    */
-  find(key: K): TreeNode<K, T> | null {
+  find(key: K): TreeNode<K, D> | null {
     for (const node of this.preOrderTraversal()) {
       if (node.key === key) return node;
     }
@@ -418,7 +418,7 @@ export class Tree<K = TreeKey, T = TreeValue> {
    * @param {TreeNode} node 
    * @returns {number}
    */
-  depth(node: TreeNode<K, T> | null = this.root): number {
+  depth(node: TreeNode<K, D> | null = this.root): number {
     if (node?.parent) {
       return this.depth(node.parent) + 1;
     }
@@ -432,7 +432,7 @@ export class Tree<K = TreeKey, T = TreeValue> {
    * @param {TreeNode} node 
    * @returns {number}
    */
-  height(node: TreeNode<K, T> | null = this.root): number {
+  height(node: TreeNode<K, D> | null = this.root): number {
     if (node.children.length) {
       return Math.max(...node.children.map(c => this.height(c))) + 1;
     }

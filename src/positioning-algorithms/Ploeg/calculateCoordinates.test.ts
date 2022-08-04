@@ -1,10 +1,10 @@
-import calculateCoordinates, { TreeValuePositioned } from "./calculateCoordinates";
+import calculateCoordinates from "./calculateCoordinates";
 import { Tree } from "../../MAryTree";
 
 
 describe('calculateCoordinates', () => {
   it('can calculate coordinates', () => {
-    const bt = new Tree<number, TreeValuePositioned>(0, {
+    const bt = new Tree(0, {
       width: 60,
       height: 25,
     });
@@ -19,6 +19,13 @@ describe('calculateCoordinates', () => {
       height: 60,
     });
 
-    calculateCoordinates(bt);
+    const positionedTree = calculateCoordinates(bt);
+
+    for (const node of positionedTree.preOrderTraversal()) {
+      expect(typeof node.data.x).toBe('number');
+      expect(typeof node.data.y).toBe('number');
+      expect(typeof node.data.width).toBe('number');
+      expect(typeof node.data.height).toBe('number');
+    }
   });
 });
