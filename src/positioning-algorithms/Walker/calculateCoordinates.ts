@@ -7,10 +7,10 @@
 import { Tree, TreeKey, TreeNode, TreeData } from '../../MAryTree';
 
 export type TreeDataPositioned<D = TreeData> = D & {
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
   prelimX?: number;
   modifier?: number;
 };
@@ -22,7 +22,7 @@ export type CalculateCoordinatesOptions = {
   nodeSpacingY?: number;
 };
 
-export default function calculateCoordinates<K, D extends TreeDataPositioned>(tree: Tree<K, D>, options: CalculateCoordinatesOptions = {}) : Tree<K, TreeDataPositioned<D>> {
+export default function calculateCoordinates<K, D extends Partial<TreeDataPositioned>>(tree: Tree<K, D>, options: CalculateCoordinatesOptions = {}) : Tree<K, TreeDataPositioned<D>> {
   const {
     nodeWidth = 2,
     nodeSpacingX = 4,
@@ -86,7 +86,7 @@ export default function calculateCoordinates<K, D extends TreeDataPositioned>(tr
     node.data.y = (nodeSpacingY + nodeHeight) * tree.depth(node);
   }
 
-  return tree;
+  return tree as Tree<K, TreeDataPositioned<D>>;
 }
 
 /**
@@ -98,7 +98,7 @@ export default function calculateCoordinates<K, D extends TreeDataPositioned>(tr
  * @param {TreeNode} node 
  * @returns {number}
  */
-function calculateX<K = TreeKey>(node: TreeNode<K, TreeDataPositioned>): number {
+function calculateX<K = TreeKey>(node: TreeNode<K, Partial<TreeDataPositioned>>): number {
   let x = node.data.prelimX;
 
   let parent = node.parent;
