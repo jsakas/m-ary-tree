@@ -11,6 +11,9 @@ export type TreeDataPositioned<K = TreeKey, D = TreeData> = TreeData & {
   height: number;
   x: number;
   y: number;
+  spacingY?: number;
+  spacingTop?: number;
+  spacingBottom?: number;
   prelim?: number;
   mod?: number;
   shift?: number;
@@ -60,7 +63,25 @@ export default function calculateCoordinates<K, D>(tree: Tree<K, D>, options: Ca
     const parentNode = node.parent;
 
     if (parentNode) {
-      node.data.y = parentNode.data.y + parentNode.data.height + nodeSpacingY;
+      let parentNodeSpacingBottom = nodeSpacingY;
+
+      if (typeof node?.parent?.data?.spacingBottom === 'number') {
+        parentNodeSpacingBottom = node.parent.data.spacingBottom;
+      } else if (typeof node?.parent?.data?.spacingY === 'number') {
+        parentNodeSpacingBottom = node.parent.data.spacingY;
+      }
+
+      let nodeSpacingTop = nodeSpacingY;
+
+      if (typeof node?.data?.spacingTop === 'number') {
+        nodeSpacingTop = node.data.spacingTop;
+      } else if (typeof node?.data?.spacingY === 'number') {
+        nodeSpacingTop = node.data.spacingY;
+      }
+
+      const spacingY = Math.max(parentNodeSpacingBottom, nodeSpacingTop);
+
+      node.data.y = parentNode.data.y + parentNode.data.height + spacingY;
     } else {
       node.data.y = 0;
     }
