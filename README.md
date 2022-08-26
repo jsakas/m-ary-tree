@@ -18,7 +18,7 @@ npm install m-ary-tree
 
 ## Usage
 
-For detailed use see the [API Documentation](./docs/modules.md)
+For detailed use see the [API Documentation](./docs/README.md)
 
 ### Basic
 
