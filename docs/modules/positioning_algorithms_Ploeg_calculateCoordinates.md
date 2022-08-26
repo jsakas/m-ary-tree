@@ -31,13 +31,13 @@
 
 #### Defined in
 
-[positioning-algorithms/Ploeg/calculateCoordinates.ts:26](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/positioning-algorithms/Ploeg/calculateCoordinates.ts#L26)
+[positioning-algorithms/Ploeg/calculateCoordinates.ts:29](https://github.com/jsakas/m-ary-tree/blob/327213c/src/positioning-algorithms/Ploeg/calculateCoordinates.ts#L29)
 
 ___
 
 ### TreeDataPositioned
 
-Ƭ **TreeDataPositioned**<`K`, `D`\>: [`TreeData`](MAryTree.md#treedata) & { `change?`: `number` ; `el?`: [`TreeNode`](../classes/MAryTree.TreeNode.md)<`K`, [`TreeDataPositioned`](positioning_algorithms_Ploeg_calculateCoordinates.md#treedatapositioned)<`K`, `D`\>\> \| ``null`` ; `er?`: [`TreeNode`](../classes/MAryTree.TreeNode.md)<`K`, [`TreeDataPositioned`](positioning_algorithms_Ploeg_calculateCoordinates.md#treedatapositioned)<`K`, `D`\>\> \| ``null`` ; `height`: `number` ; `mod?`: `number` ; `msel?`: `number` ; `mser?`: `number` ; `prelim?`: `number` ; `shift?`: `number` ; `tl?`: [`TreeNode`](../classes/MAryTree.TreeNode.md)<`K`, [`TreeDataPositioned`](positioning_algorithms_Ploeg_calculateCoordinates.md#treedatapositioned)<`K`, `D`\>\> \| ``null`` ; `tr?`: [`TreeNode`](../classes/MAryTree.TreeNode.md)<`K`, [`TreeDataPositioned`](positioning_algorithms_Ploeg_calculateCoordinates.md#treedatapositioned)<`K`, `D`\>\> \| ``null`` ; `width`: `number` ; `x`: `number` ; `y`: `number`  }
+Ƭ **TreeDataPositioned**<`K`, `D`\>: [`TreeData`](MAryTree.md#treedata) & { `change?`: `number` ; `el?`: [`TreeNode`](../classes/MAryTree.TreeNode.md)<`K`, [`TreeDataPositioned`](positioning_algorithms_Ploeg_calculateCoordinates.md#treedatapositioned)<`K`, `D`\>\> \| ``null`` ; `er?`: [`TreeNode`](../classes/MAryTree.TreeNode.md)<`K`, [`TreeDataPositioned`](positioning_algorithms_Ploeg_calculateCoordinates.md#treedatapositioned)<`K`, `D`\>\> \| ``null`` ; `height`: `number` ; `mod?`: `number` ; `msel?`: `number` ; `mser?`: `number` ; `prelim?`: `number` ; `shift?`: `number` ; `spacingBottom?`: `number` ; `spacingTop?`: `number` ; `spacingY?`: `number` ; `tl?`: [`TreeNode`](../classes/MAryTree.TreeNode.md)<`K`, [`TreeDataPositioned`](positioning_algorithms_Ploeg_calculateCoordinates.md#treedatapositioned)<`K`, `D`\>\> \| ``null`` ; `tr?`: [`TreeNode`](../classes/MAryTree.TreeNode.md)<`K`, [`TreeDataPositioned`](positioning_algorithms_Ploeg_calculateCoordinates.md#treedatapositioned)<`K`, `D`\>\> \| ``null`` ; `width`: `number` ; `x`: `number` ; `y`: `number`  }
 
 #### Type parameters
 
@@ -48,7 +48,7 @@ ___
 
 #### Defined in
 
-[positioning-algorithms/Ploeg/calculateCoordinates.ts:9](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/positioning-algorithms/Ploeg/calculateCoordinates.ts#L9)
+[positioning-algorithms/Ploeg/calculateCoordinates.ts:9](https://github.com/jsakas/m-ary-tree/blob/327213c/src/positioning-algorithms/Ploeg/calculateCoordinates.ts#L9)
 
 ## Functions
 
@@ -76,7 +76,7 @@ ___
 
 #### Defined in
 
-[positioning-algorithms/Ploeg/calculateCoordinates.ts:52](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/positioning-algorithms/Ploeg/calculateCoordinates.ts#L52)
+[positioning-algorithms/Ploeg/calculateCoordinates.ts:55](https://github.com/jsakas/m-ary-tree/blob/327213c/src/positioning-algorithms/Ploeg/calculateCoordinates.ts#L55)
 
 ___
 
@@ -98,4 +98,4 @@ ___
 
 #### Defined in
 
-[positioning-algorithms/Ploeg/calculateCoordinates.ts:43](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/positioning-algorithms/Ploeg/calculateCoordinates.ts#L43)
+[positioning-algorithms/Ploeg/calculateCoordinates.ts:46](https://github.com/jsakas/m-ary-tree/blob/327213c/src/positioning-algorithms/Ploeg/calculateCoordinates.ts#L46)

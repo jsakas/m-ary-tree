@@ -61,7 +61,7 @@
 
 #### Defined in
 
-[MAryTree.ts:147](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L147)
+[MAryTree.ts:147](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L147)
 
 ## Properties
 
@@ -79,7 +79,7 @@ options stored options passed in on object construction
 
 #### Defined in
 
-[MAryTree.ts:140](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L140)
+[MAryTree.ts:140](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L140)
 
 ___
 
@@ -97,7 +97,7 @@ root reference to the tree's root node
 
 #### Defined in
 
-[MAryTree.ts:135](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L135)
+[MAryTree.ts:135](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L135)
 
 ## Methods
 
@@ -111,7 +111,7 @@ root reference to the tree's root node
 
 #### Defined in
 
-[MAryTree.ts:443](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L443)
+[MAryTree.ts:443](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L443)
 
 ___
 
@@ -137,7 +137,7 @@ Generates nodes in an breadth-first traversal
 
 #### Defined in
 
-[MAryTree.ts:221](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L221)
+[MAryTree.ts:221](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L221)
 
 ___
 
@@ -157,7 +157,7 @@ of the same sub-tree as this nodes parent.
 
 #### Defined in
 
-[MAryTree.ts:323](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L323)
+[MAryTree.ts:323](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L323)
 
 ___
 
@@ -179,7 +179,7 @@ Return depth of a node.
 
 #### Defined in
 
-[MAryTree.ts:421](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L421)
+[MAryTree.ts:421](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L421)
 
 ___
 
@@ -201,7 +201,7 @@ Find a node by supplying its key.
 
 #### Defined in
 
-[MAryTree.ts:407](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L407)
+[MAryTree.ts:407](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L407)
 
 ___
 
@@ -223,7 +223,7 @@ Return the height of a node.
 
 #### Defined in
 
-[MAryTree.ts:435](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L435)
+[MAryTree.ts:435](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L435)
 
 ___
 
@@ -249,7 +249,7 @@ Generates nodes in an in-order traversal
 
 #### Defined in
 
-[MAryTree.ts:159](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L159)
+[MAryTree.ts:159](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L159)
 
 ___
 
@@ -273,7 +273,7 @@ Insert a new child node at the given parent key.
 
 #### Defined in
 
-[MAryTree.ts:345](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L345)
+[MAryTree.ts:345](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L345)
 
 ___
 
@@ -299,7 +299,7 @@ Generates left-descendant nodes
 
 #### Defined in
 
-[MAryTree.ts:285](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L285)
+[MAryTree.ts:285](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L285)
 
 ___
 
@@ -324,7 +324,7 @@ The left-most descendent is defined as the left most node in the sub-tree at giv
 
 #### Defined in
 
-[MAryTree.ts:305](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L305)
+[MAryTree.ts:305](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L305)
 
 ___
 
@@ -350,7 +350,7 @@ Generates left-sibling nodes
 
 #### Defined in
 
-[MAryTree.ts:269](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L269)
+[MAryTree.ts:269](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L269)
 
 ___
 
@@ -376,7 +376,7 @@ Generates nodes in a post-order traversal
 
 #### Defined in
 
-[MAryTree.ts:187](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L187)
+[MAryTree.ts:187](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L187)
 
 ___
 
@@ -402,7 +402,7 @@ Generates nodes in an pre-order traversal
 
 #### Defined in
 
-[MAryTree.ts:204](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L204)
+[MAryTree.ts:204](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L204)
 
 ___
 
@@ -426,7 +426,7 @@ true if the node was found, false if it was not found.
 
 #### Defined in
 
-[MAryTree.ts:386](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L386)
+[MAryTree.ts:386](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L386)
 
 ___
 
@@ -452,4 +452,4 @@ Generates nodes at a single depth
 
 #### Defined in
 
-[MAryTree.ts:246](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L246)
+[MAryTree.ts:246](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L246)

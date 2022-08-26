@@ -30,7 +30,7 @@
 
 #### Defined in
 
-[positioning-algorithms/Ploeg/calculateCoordinates.ts:36](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/positioning-algorithms/Ploeg/calculateCoordinates.ts#L36)
+[positioning-algorithms/Ploeg/calculateCoordinates.ts:39](https://github.com/jsakas/m-ary-tree/blob/327213c/src/positioning-algorithms/Ploeg/calculateCoordinates.ts#L39)
 
 ## Properties
 
@@ -40,7 +40,7 @@
 
 #### Defined in
 
-[positioning-algorithms/Ploeg/calculateCoordinates.ts:33](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/positioning-algorithms/Ploeg/calculateCoordinates.ts#L33)
+[positioning-algorithms/Ploeg/calculateCoordinates.ts:36](https://github.com/jsakas/m-ary-tree/blob/327213c/src/positioning-algorithms/Ploeg/calculateCoordinates.ts#L36)
 
 ___
 
@@ -50,7 +50,7 @@ ___
 
 #### Defined in
 
-[positioning-algorithms/Ploeg/calculateCoordinates.ts:32](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/positioning-algorithms/Ploeg/calculateCoordinates.ts#L32)
+[positioning-algorithms/Ploeg/calculateCoordinates.ts:35](https://github.com/jsakas/m-ary-tree/blob/327213c/src/positioning-algorithms/Ploeg/calculateCoordinates.ts#L35)
 
 ___
 
@@ -60,4 +60,4 @@ ___
 
 #### Defined in
 
-[positioning-algorithms/Ploeg/calculateCoordinates.ts:34](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/positioning-algorithms/Ploeg/calculateCoordinates.ts#L34)
+[positioning-algorithms/Ploeg/calculateCoordinates.ts:37](https://github.com/jsakas/m-ary-tree/blob/327213c/src/positioning-algorithms/Ploeg/calculateCoordinates.ts#L37)

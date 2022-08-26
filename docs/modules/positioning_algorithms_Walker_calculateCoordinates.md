@@ -28,13 +28,13 @@
 
 #### Defined in
 
-[positioning-algorithms/Walker/calculateCoordinates.ts:18](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/positioning-algorithms/Walker/calculateCoordinates.ts#L18)
+[positioning-algorithms/Walker/calculateCoordinates.ts:18](https://github.com/jsakas/m-ary-tree/blob/327213c/src/positioning-algorithms/Walker/calculateCoordinates.ts#L18)
 
 ___
 
 ### TreeDataPositioned
 
-Ƭ **TreeDataPositioned**<`D`\>: `D` & { `height?`: `number` ; `modifier?`: `number` ; `prelimX?`: `number` ; `width?`: `number` ; `x?`: `number` ; `y?`: `number`  }
+Ƭ **TreeDataPositioned**<`D`\>: `D` & { `height`: `number` ; `modifier?`: `number` ; `prelimX?`: `number` ; `width`: `number` ; `x`: `number` ; `y`: `number`  }
 
 #### Type parameters
 
@@ -44,7 +44,7 @@ ___
 
 #### Defined in
 
-[positioning-algorithms/Walker/calculateCoordinates.ts:9](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/positioning-algorithms/Walker/calculateCoordinates.ts#L9)
+[positioning-algorithms/Walker/calculateCoordinates.ts:9](https://github.com/jsakas/m-ary-tree/blob/327213c/src/positioning-algorithms/Walker/calculateCoordinates.ts#L9)
 
 ## Functions
 
@@ -57,7 +57,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `K` | `K` |
-| `D` | extends [`TreeDataPositioned`](positioning_algorithms_Walker_calculateCoordinates.md#treedatapositioned)<[`TreeData`](MAryTree.md#treedata)\> |
+| `D` | extends `Partial`<[`TreeDataPositioned`](positioning_algorithms_Walker_calculateCoordinates.md#treedatapositioned)<[`TreeData`](MAryTree.md#treedata)\>\> |
 
 #### Parameters
 
@@ -72,4 +72,4 @@ ___
 
 #### Defined in
 
-[positioning-algorithms/Walker/calculateCoordinates.ts:25](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/positioning-algorithms/Walker/calculateCoordinates.ts#L25)
+[positioning-algorithms/Walker/calculateCoordinates.ts:25](https://github.com/jsakas/m-ary-tree/blob/327213c/src/positioning-algorithms/Walker/calculateCoordinates.ts#L25)

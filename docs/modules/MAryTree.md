@@ -25,7 +25,7 @@
 
 #### Defined in
 
-[MAryTree.ts:2](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L2)
+[MAryTree.ts:2](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L2)
 
 ___
 
@@ -35,7 +35,7 @@ ___
 
 #### Defined in
 
-[MAryTree.ts:1](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L1)
+[MAryTree.ts:1](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L1)
 
 ___
 
@@ -51,4 +51,4 @@ ___
 
 #### Defined in
 
-[MAryTree.ts:3](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L3)
+[MAryTree.ts:3](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L3)

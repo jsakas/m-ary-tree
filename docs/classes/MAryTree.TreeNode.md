@@ -61,7 +61,7 @@ TreeNode constructor
 
 #### Defined in
 
-[MAryTree.ts:40](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L40)
+[MAryTree.ts:40](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L40)
 
 ## Properties
 
@@ -79,7 +79,7 @@ children array of child nodes
 
 #### Defined in
 
-[MAryTree.ts:26](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L26)
+[MAryTree.ts:26](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L26)
 
 ___
 
@@ -97,7 +97,7 @@ data information stored on node
 
 #### Defined in
 
-[MAryTree.ts:16](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L16)
+[MAryTree.ts:16](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L16)
 
 ___
 
@@ -115,7 +115,7 @@ key key for this node
 
 #### Defined in
 
-[MAryTree.ts:11](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L11)
+[MAryTree.ts:11](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L11)
 
 ___
 
@@ -133,7 +133,7 @@ leftNeighbor reference to this nodes left neighbor
 
 #### Defined in
 
-[MAryTree.ts:31](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L31)
+[MAryTree.ts:31](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L31)
 
 ___
 
@@ -151,7 +151,7 @@ parent reference to this nodes parent
 
 #### Defined in
 
-[MAryTree.ts:21](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L21)
+[MAryTree.ts:21](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L21)
 
 ## Accessors
 
@@ -167,7 +167,7 @@ Returns true if this node has children.
 
 #### Defined in
 
-[MAryTree.ts:88](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L88)
+[MAryTree.ts:88](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L88)
 
 ___
 
@@ -183,7 +183,7 @@ Returns true if this node has no children.
 
 #### Defined in
 
-[MAryTree.ts:80](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L80)
+[MAryTree.ts:80](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L80)
 
 ___
 
@@ -199,7 +199,7 @@ Returns the left sibling of this node if it exists.
 
 #### Defined in
 
-[MAryTree.ts:108](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L108)
+[MAryTree.ts:108](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L108)
 
 ___
 
@@ -215,7 +215,7 @@ Returns the index of this node amoung its sibling nodes.
 
 #### Defined in
 
-[MAryTree.ts:96](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L96)
+[MAryTree.ts:96](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L96)
 
 ## Methods
 
@@ -229,7 +229,7 @@ Returns the index of this node amoung its sibling nodes.
 
 #### Defined in
 
-[MAryTree.ts:122](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L122)
+[MAryTree.ts:122](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L122)
 
 ___
 
@@ -251,7 +251,7 @@ Check if this node is a descendent of a parent.
 
 #### Defined in
 
-[MAryTree.ts:64](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L64)
+[MAryTree.ts:64](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L64)
 
 ___
 
@@ -273,4 +273,4 @@ ___
 
 #### Defined in
 
-[MAryTree.ts:48](https://github.com/jsakas/m-ary-tree/blob/f63681a/src/MAryTree.ts#L48)
+[MAryTree.ts:48](https://github.com/jsakas/m-ary-tree/blob/327213c/src/MAryTree.ts#L48)
