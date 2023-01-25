@@ -1,6 +1,6 @@
 {
   "name": "m-ary-tree",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "A tree data structure",
   "main": "dist/MAryTree.js",
   "types": "dist/MAryTree.d.ts",
