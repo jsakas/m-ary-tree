@@ -90,7 +90,7 @@ There are currently two positioning algorithms implemented:
 In this implementation all nodes must be the same width and height.
 
 ```typescript
-import calculateCoordinates from 'm-ary-tree/dist/positioning-algorithms/Walker/calculateCoordinates';
+import { calculateCoordinates } from 'm-ary-tree/dist/positioning-algorithms/Walker/calculateCoordinates';
 import { Tree } from 'm-ary-tree';
 
 const tree = new Tree<number>(0);
@@ -121,7 +121,7 @@ for (const node of positionedTree.preOrderTraversal()) {
 In this implementation all nodes can be different sizes.
 
 ```typescript
-import calculateCoordinates from 'm-ary-tree/dist/positioning-algorithms/Walker/calculateCoordinates';
+import { calculateCoordinates } from 'm-ary-tree/dist/positioning-algorithms/Walker/calculateCoordinates';
 import { Tree } from 'm-ary-tree';
 
 const tree = new Tree(0, {

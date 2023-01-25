@@ -22,7 +22,7 @@ export type CalculateCoordinatesOptions = {
   nodeSpacingY?: number;
 };
 
-export default function calculateCoordinates<K, D extends Partial<TreeDataPositioned>>(tree: Tree<K, D>, options: CalculateCoordinatesOptions = {}) : Tree<K, TreeDataPositioned<D>> {
+export function calculateCoordinates<K, D extends Partial<TreeDataPositioned>>(tree: Tree<K, D>, options: CalculateCoordinatesOptions = {}) : Tree<K, TreeDataPositioned<D>> {
   const {
     nodeWidth = 2,
     nodeSpacingX = 4,
@@ -110,3 +110,5 @@ function calculateX<K = TreeKey>(node: TreeNode<K, Partial<TreeDataPositioned>>)
 
   return x;
 }
+
+export default calculateCoordinates;
