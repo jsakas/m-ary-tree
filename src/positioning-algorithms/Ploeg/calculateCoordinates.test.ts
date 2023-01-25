@@ -1,4 +1,4 @@
-import calculateCoordinates from "./calculateCoordinates";
+import { calculateCoordinates } from "./calculateCoordinates";
 import { Tree } from "../../MAryTree";
 
 

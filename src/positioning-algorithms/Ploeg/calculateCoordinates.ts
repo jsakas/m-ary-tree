@@ -52,7 +52,7 @@ export function updateIYL(minY: number, i: number, ih: IYL): IYL {
   return new IYL(minY, i, ih);
 }
 
-export default function calculateCoordinates<K, D>(tree: Tree<K, D>, options: CalculateCoordinatesOptions = {}) : Tree<K, TreeDataPositioned<K, D>> {
+export function calculateCoordinates<K, D>(tree: Tree<K, D>, options: CalculateCoordinatesOptions = {}) : Tree<K, TreeDataPositioned<K, D>> {
   const {
     nodeSpacingX = 4,
     nodeSpacingY = 4,
@@ -273,3 +273,5 @@ export default function calculateCoordinates<K, D>(tree: Tree<K, D>, options: Ca
 
   return tree as unknown as Tree<K, TreeDataPositioned<K, D>>;
 }
+
+export default calculateCoordinates;
