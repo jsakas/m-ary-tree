@@ -71,9 +71,9 @@ TypeScript generics are supported:
 ```typescript
 type MyNodeType = string
 
-const tree = new Tree<number, MyNodeType>(0, { data: 'foo' });
+const tree = new Tree<number, MyNodeType>(0, 'foo');
 
-console.log(tree.root.data) // 'foo'
+console.log(tree.data) // 'foo'
 ```
 
 ## Motivation
@@ -91,7 +91,7 @@ In this implementation all nodes must be the same width and height.
 
 ```typescript
 import { calculateCoordinates } from 'm-ary-tree/dist/positioning-algorithms/Walker/calculateCoordinates';
-import { Tree } from 'm-ary-tree';
+import { Tree, preOrderTraversal } from 'm-ary-tree';
 
 const tree = new Tree<number>(0);
 
@@ -108,7 +108,7 @@ calculateCoordinates(tree, {
 
 const positionedTree = calculateCoordinates(tree);
 
-for (const node of positionedTree.preOrderTraversal()) {
+for (const node of preOrderTraversal(positionedTree)) {
   expect(typeof node.data.x).toBe('number')
   expect(typeof node.data.y).toBe('number')
   expect(typeof node.data.width).toBe('number')
@@ -122,7 +122,7 @@ In this implementation all nodes can be different sizes.
 
 ```typescript
 import { calculateCoordinates } from 'm-ary-tree/dist/positioning-algorithms/Walker/calculateCoordinates';
-import { Tree } from 'm-ary-tree';
+import { Tree, preOrderTraversal } from 'm-ary-tree';
 
 const tree = new Tree(0, {
   width: 60,
@@ -144,7 +144,7 @@ const positionedTree = calculateCoordinates(tree, {
   nodeSpacingY: 30,
 });
 
-for (const node of positionedTree.preOrderTraversal()) {
+for (const node of preOrderTraversal(positionedTree)) {
   expect(typeof node.data.x).toBe('number')
   expect(typeof node.data.y).toBe('number')
   expect(typeof node.data.width).toBe('number')

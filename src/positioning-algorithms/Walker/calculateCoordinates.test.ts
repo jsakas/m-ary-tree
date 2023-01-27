@@ -1,5 +1,5 @@
 import calculateCoordinates, { TreeDataPositioned } from "./calculateCoordinates";
-import { Tree } from "../../MAryTree";
+import { preOrderTraversal, Tree } from "../../MAryTree";
 
 
 describe('calculateCoordinates', () => {
@@ -11,7 +11,7 @@ describe('calculateCoordinates', () => {
 
     const positionedTree = calculateCoordinates(bt);
 
-    for (const node of positionedTree.preOrderTraversal()) {
+    for (const node of preOrderTraversal(positionedTree)) {
       expect(typeof node.data.x).toBe('number');
       expect(typeof node.data.y).toBe('number');
       expect(typeof node.data.width).toBe('number');
