@@ -5,13 +5,9 @@
     "downlevelIteration": true,
     "declaration": true,
     "outDir": "dist",
-    "target": "ES5",
-    "sourceMap": true,
+    "target": "ES2015",
+    "sourceMap": true
   },
-  "exclude": [
-    "src/**/*.test.ts"
-  ],
-  "include": [
-    "src/**/*.ts"
-  ]
+  "exclude": ["src/**/*.test.ts"],
+  "include": ["src/**/*.ts"]
 }
