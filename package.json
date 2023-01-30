@@ -4,10 +4,6 @@
   "description": "A tree data structure",
   "main": "dist/MAryTree.js",
   "types": "dist/MAryTree.d.ts",
-  "exports": {
-    ".": "./dist/MAryTree.js",
-    "./positioning-algorithms/*": "./dist/positioning-algorithms/*.js"
-  },
   "repository": "git@github.com:jsakas/m-ary-tree.git",
   "author": "Jon Sakas <jon.sakas@gmail.com>",
   "license": "MIT",
