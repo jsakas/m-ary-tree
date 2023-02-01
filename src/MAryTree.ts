@@ -238,7 +238,7 @@ export class Tree<K = TreeKey, D = TreeData> {
    * @param {TreeKey | (NodeFilter)} node 
    * @returns {(Tree|null)}
    */
-  replace(node: Tree<K, D> | ((node: Tree<K, D>) => Tree<K, D>)): Tree<K, D> {
+  replace(node: Tree<any, any> | ((node: Tree<any, any>) => Tree<any, any>)): Tree<any, any> {
     if (typeof node === 'function') {
       const newNode = node(this);
       this.replace(newNode);
