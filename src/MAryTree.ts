@@ -217,7 +217,7 @@ export class Tree<K = TreeKey, D = TreeData> {
    * @param {TreeKey} key the tree key to remove
    * @returns {boolean} true if the node was found, false if it was not found.
    */
-  remove(key: K): boolean {
+  remove(key: K = this.key): boolean {
     for (const node of preOrderTraversal(this)) {
 
       if (node.key === key) {
@@ -233,9 +233,36 @@ export class Tree<K = TreeKey, D = TreeData> {
   }
 
   /**
+   * Replace this node with a new node
+   * 
+   * @param {TreeKey | (NodeFilter)} node 
+   * @returns {(Tree|null)}
+   */
+  replace(node: Tree<K, D> | ((node: Tree<K, D>) => Tree<K, D>)): Tree<K, D> {
+    if (typeof node === 'function') {
+      const newNode = node(this);
+      this.replace(newNode);
+
+      return newNode;
+    }
+
+    if (node instanceof Tree) {
+      this.key = node.key;
+      this.data = node.data;
+      this.options = node.options;
+      this.children = node.children;
+
+      node.parent = this.parent;
+      node.leftNeighbor = this.leftNeighbor;
+    }
+
+    return node;
+  }
+
+  /**
    * Find a node by supplying its key, or a callback function
    * 
-   * @param {TreeKey | NodeFilter} key 
+   * @param {TreeKey | (NodeFilter)} key 
    * @returns {(Tree|null)}
    */
   find(key: K | ((node: Tree<K, D>) => boolean)): Tree<K, D> | null {

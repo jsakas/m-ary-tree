@@ -162,7 +162,7 @@ describe('Tree', () => {
     expect(bt.find('L')?.leftNeighbor?.key).toEqual(undefined);
   });
 
-  it.only('can get left most descendant at depth', () => {
+  it('can get left most descendant at depth', () => {
     const bt = new Tree('O');
 
     bt.insert('O', 'E');
@@ -187,6 +187,50 @@ describe('Tree', () => {
     expect(bt.find('N').leftMostDescendant(0)?.key).toEqual('N');
     expect(bt.find('N').leftMostDescendant(1)?.key).toEqual('G');
     expect(bt.find('N').leftMostDescendant(2)?.key).toEqual('H');
+  });
+
+  it('can remove a node', () => {
+    const root = new Tree(1);
+
+    root.insert(1, 2);
+    const three = root.insert(1, 3);
+
+    expect(root.children).toHaveLength(2);
+
+    root.remove(2);
+
+    expect(root.find(2)).toBe(null);
+    expect(root.children).toHaveLength(1);
+
+    three?.remove();
+
+    expect(root.find(3)).toBe(null);
+    expect(root.children).toHaveLength(0);
+  });
+
+  it('can replace a node', () => {
+    const root = new Tree(1);
+
+    const two = root.insert(1, 2);
+    const three = root.insert(1, 3);
+
+    expect(root.children).toHaveLength(2);
+
+    two.replace(new Tree(4));
+
+    expect(root.find(2)).toBe(null);
+    expect(root.find(4)).not.toBe(null);
+    expect(root.children).toHaveLength(2);
+
+    three.replace(node => {
+      node.key = 5;
+      return node;
+    });
+
+    expect(root.find(3)).toBe(null);
+    expect(root.find(5)).not.toBe(null);
+
+    expect(root.children).toHaveLength(2);
   });
 
   it('inOrderTraversal', () => {
