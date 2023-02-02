@@ -4,7 +4,7 @@
  * 
  * Reference: https://www.cs.unc.edu/techreports/89-034.pdf
  */
-import { Tree, TreeKey, TreeNode, TreeData } from '../../MAryTree';
+import { Tree, TreeKey, TreeData, postOrderTraversal, leftSiblingTraversal, leftDescendantTraversal, preOrderTraversal } from '../../MAryTree';
 
 export type TreeDataPositioned<D = TreeData> = D & {
   x: number;
@@ -32,7 +32,7 @@ export function calculateCoordinates<K, D extends Partial<TreeDataPositioned>>(t
 
   tree.connectLeftNeighbor();
 
-  for (const node of (tree as unknown as Tree<K, TreeDataPositioned<D>>).postOrderTraversal()) {
+  for (const node of postOrderTraversal(tree)) {
     if (!node.data) {
       node.data = {} as TreeDataPositioned<D>;
     }
@@ -62,8 +62,8 @@ export function calculateCoordinates<K, D extends Partial<TreeDataPositioned>>(t
       }
     }
 
-    for (const leftSibling of tree.leftSiblingTraversal(node)) {
-      for (const leftChild of tree.leftDescendantTraversal(node)) {
+    for (const leftSibling of leftSiblingTraversal(node)) {
+      for (const leftChild of leftDescendantTraversal(node)) {
         if (leftChild.leftNeighbor && leftChild.leftNeighbor.isDescendant(leftSibling)) {
           const leftChildX = calculateX(leftChild);
           const leftNeighborX = calculateX(leftChild.leftNeighbor);
@@ -81,7 +81,7 @@ export function calculateCoordinates<K, D extends Partial<TreeDataPositioned>>(t
     }
   }
 
-  for (const node of tree.preOrderTraversal()) {
+  for (const node of preOrderTraversal(tree)) {
     node.data.x = calculateX(node);
     node.data.y = (nodeSpacingY + nodeHeight) * tree.depth(node);
   }
@@ -95,10 +95,10 @@ export function calculateCoordinates<K, D extends Partial<TreeDataPositioned>>(t
  * Warning: Do not use this method directly. Call `calculateCoordinates` instead.
  * 
  * @private
- * @param {TreeNode} node 
+ * @param {Tree} node 
  * @returns {number}
  */
-function calculateX<K = TreeKey>(node: TreeNode<K, Partial<TreeDataPositioned>>): number {
+function calculateX<K = TreeKey>(node: Tree<K, Partial<TreeDataPositioned>>): number {
   let x = node.data.prelimX;
 
   let parent = node.parent;

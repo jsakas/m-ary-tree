@@ -1,15 +1,15 @@
-import { Tree } from "./MAryTree";
+import { breadthFirstTraversal, inOrderTraversal, leftDescendantTraversal, leftSiblingTraversal, postOrderTraversal, preOrderTraversal, rowTraversal, Tree } from "./MAryTree";
 
 describe('Tree', () => {
   it('creates tree with single node', () => {
     const bt = new Tree(0);
 
-    expect(bt.root.parent).toBe(null);
-    expect(bt.root.children).toEqual([]);
+    expect(bt.parent).toBe(null);
+    expect(bt.children).toEqual([]);
   });
 
   it('enforces max children', () => {
-    const bt = new Tree(1, 1, {
+    const bt = new Tree(1, 1, null, {
       maxChildren: 3,
     });
 
@@ -23,13 +23,13 @@ describe('Tree', () => {
   it('can use primitives as data', () => {
     const tree = new Tree<number, string>(0, 'foo');
 
-    expect(tree.root.data).toEqual('foo');
+    expect(tree.data).toEqual('foo');
   });
 
   it('can use objects as data', () => {
     const tree = new Tree<number, { foo: string }>(0, { foo: 'bar' });
 
-    expect(tree.root.data.foo).toEqual('bar');
+    expect(tree.data.foo).toEqual('bar');
   });
 
   it('can be converted to json', () => {
@@ -41,22 +41,20 @@ describe('Tree', () => {
     const json = JSON.stringify(tree);
 
     expect(JSON.parse(json)).toEqual({ 
-      root: { 
-        key: 0, 
-        children: [
-          {
-            parent: 0,
-            key: 1,
-            children: []
-          },
-          {
-            parent: 0,
-            key: 2,
-            children: []
-          }
-        ] 
-      }, 
-      options: {} 
+      key: 0, 
+      data: null,
+      children: [
+        {
+          key: 1,
+          data: null,
+          children: []
+        },
+        {
+          key: 2,
+          data: null,
+          children: []
+        }
+      ],
     });
   });
 
@@ -79,7 +77,7 @@ describe('Tree', () => {
   it('can get depth', () => {
     const bt = new Tree(1);
 
-    expect(bt.depth(bt.root)).toBe(0);
+    expect(bt.depth(bt)).toBe(0);
 
     expect(bt.depth(bt.insert(1, 2))).toBe(1);
     expect(bt.depth(bt.insert(1, 3))).toBe(1);
@@ -113,10 +111,9 @@ describe('Tree', () => {
     bt.insert(3, 6);
     bt.insert(5, 7);
 
-    expect(Array.from(bt.rowTraversal(0)).map(n => n.key)).toEqual([1]);
-    expect(Array.from(bt.rowTraversal(1)).map(n => n.key)).toEqual([2, 3]);
-    expect(Array.from(bt.rowTraversal(2)).map(n => n.key)).toEqual([4, 5, 6]);
-    expect(Array.from(bt.rowTraversal(3)).map(n => n.key)).toEqual([7]);
+    expect(Array.from(rowTraversal(bt, 0)).map(n => n.key)).toEqual([1]);
+    expect(Array.from(rowTraversal(bt, 1)).map(n => n.key)).toEqual([2, 3]);
+    expect(Array.from(rowTraversal(bt, 2)).map(n => n.key)).toEqual([4, 5, 6]);
   });
 
   it('can connect left neighbor', () => {
@@ -187,9 +184,53 @@ describe('Tree', () => {
     bt.insert('M', 'K');
     bt.insert('M', 'L');
 
-    expect(bt.leftMostDescendant(bt.find('N'), 0)?.key).toEqual('N');
-    expect(bt.leftMostDescendant(bt.find('N'), 1)?.key).toEqual('G');
-    expect(bt.leftMostDescendant(bt.find('N'), 2)?.key).toEqual('H');
+    expect(bt.find('N').leftMostDescendant(0)?.key).toEqual('N');
+    expect(bt.find('N').leftMostDescendant(1)?.key).toEqual('G');
+    expect(bt.find('N').leftMostDescendant(2)?.key).toEqual('H');
+  });
+
+  it('can remove a node', () => {
+    const root = new Tree(1);
+
+    root.insert(1, 2);
+    const three = root.insert(1, 3);
+
+    expect(root.children).toHaveLength(2);
+
+    root.remove(2);
+
+    expect(root.find(2)).toBe(null);
+    expect(root.children).toHaveLength(1);
+
+    three?.remove();
+
+    expect(root.find(3)).toBe(null);
+    expect(root.children).toHaveLength(0);
+  });
+
+  it('can replace a node', () => {
+    const root = new Tree(1);
+
+    const two = root.insert(1, 2);
+    const three = root.insert(1, 3);
+
+    expect(root.children).toHaveLength(2);
+
+    two.replace(new Tree(4));
+
+    expect(root.find(2)).toBe(null);
+    expect(root.find(4)).not.toBe(null);
+    expect(root.children).toHaveLength(2);
+
+    three.replace(node => {
+      node.key = 5;
+      return node;
+    });
+
+    expect(root.find(3)).toBe(null);
+    expect(root.find(5)).not.toBe(null);
+
+    expect(root.children).toHaveLength(2);
   });
 
   it('inOrderTraversal', () => {
@@ -202,7 +243,7 @@ describe('Tree', () => {
     bt.insert(2, 6);
     bt.insert(2, 7);
 
-    const a = Array.from(bt.inOrderTraversal()).map(n => n.key);
+    const a = Array.from(inOrderTraversal(bt)).map(n => n.key);
 
     expect(a).toEqual([5, 6, 2, 7, 3, 1, 4]);
   });
@@ -215,7 +256,7 @@ describe('Tree', () => {
     bt.insert(2, 4);
     bt.insert(2, 5);
 
-    const a = Array.from(bt.preOrderTraversal()).map(n => n.key);
+    const a = Array.from(preOrderTraversal(bt)).map(n => n.key);
 
     expect(a).toEqual([1, 2, 4, 5, 3]);
   });
@@ -242,7 +283,7 @@ describe('Tree', () => {
     bt.insert('M', 'K');
     bt.insert('M', 'L');
 
-    const a = Array.from(bt.postOrderTraversal()).map(n => n.key);
+    const a = Array.from(postOrderTraversal(bt)).map(n => n.key);
 
     expect(a).toEqual(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O']);
   });
@@ -257,7 +298,7 @@ describe('Tree', () => {
     bt.insert(3, 6);
     bt.insert(5, 7);
 
-    const a = Array.from(bt.breadthFirstTraversal()).map(n => n.key);
+    const a = Array.from(breadthFirstTraversal(bt)).map(n => n.key);
 
     expect(a).toEqual([1, 2, 3, 4, 5, 6, 7]);
   });
@@ -272,7 +313,7 @@ describe('Tree', () => {
     const n = bt.insert(1, 6);
     bt.insert(1, 7);
 
-    const a = Array.from(bt.leftSiblingTraversal(n)).map(n => n.key);
+    const a = Array.from(leftSiblingTraversal(n)).map(n => n.key);
 
     expect(a).toEqual([5, 4, 3, 2]);
   });
@@ -299,11 +340,11 @@ describe('Tree', () => {
     bt.insert('M', 'K');
     bt.insert('M', 'L');
 
-    const a = Array.from(bt.leftDescendantTraversal(bt.root)).map(n => n.key);
+    const a = Array.from(leftDescendantTraversal(bt)).map(n => n.key);
 
     expect(a).toEqual(['E', 'A', 'B']);
 
-    const b = Array.from(bt.leftDescendantTraversal(N)).map(n => n.key);
+    const b = Array.from(leftDescendantTraversal(N)).map(n => n.key);
 
     expect(b).toEqual(['G', 'H']);
 
@@ -323,7 +364,7 @@ describe('Tree', () => {
     bt1.insert(1, 3);
     bt1.insert(3, 6);
 
-    const a = Array.from(bt1.breadthFirstTraversal()).map(n => n.key);
+    const a = Array.from(breadthFirstTraversal(bt1)).map(n => n.key);
 
     expect(a).toEqual([1, 2, 3, 4, 5, 6, 7]);
   });

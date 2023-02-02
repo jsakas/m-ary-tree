@@ -1,46 +1,58 @@
 export type TreeKey = string | number;
-export type TreeData = { [key: string] : unknown };
+export type TreeData = { [key: string]: unknown };
 export type TreeOptions = {
   maxChildren?: number;
 };
-export class TreeNode<K = TreeKey, D = TreeData> {
+
+export function isTree(obj: unknown): obj is Tree {
+  return obj instanceof Tree;
+}
+
+export class Tree<K = TreeKey, D = TreeData> {
   /**
-   * @memberof TreeNode
+   * @memberof Tree
    * @member {TreeKey} key key for this node
    */
   key: K;
   /**
-   * @memberof TreeNode
+   * @memberof Tree
    * @member {TreeData} data information stored on node
    */
   data: D;
   /**
-   * @memberof TreeNode
-   * @member {TreeNode} parent reference to this nodes parent
+   * @memberof Tree
+   * @member {Tree} parent reference to this nodes parent
    */
-  parent: TreeNode<K, D> | null;
+  parent?: Tree<K, D>;
   /**
-   * @memberof TreeNode
-   * @member {TreeNode[]} children array of child nodes
+   * @memberof Tree
+   * @member {TreeOptions} options stored options passed in on object construction 
    */
-  children: TreeNode<K, D>[];
+  options: TreeOptions;
   /**
-   * @memberof TreeNode
-   * @member {TreeNode} leftNeighbor reference to this nodes left neighbor
+   * @memberof Tree
+   * @member {Tree[]} children array of child nodes
    */
-  leftNeighbor: TreeNode<K, D> | null;
+  children: Tree<K, D>[];
+  /**
+   * @memberof Tree
+   * @member {Tree} leftNeighbor reference to this nodes left neighbor
+   */
+  leftNeighbor: Tree<K, D> | null;
 
   /**
-   * TreeNode constructor
+   * Tree constructor
    * 
    * @param {TreeKey} key 
    * @param {TreeData} data 
-   * @param {(TreeNode|null)} parent 
+   * @param {(Tree|null)} parent 
+   * @param {TreeOptions} options 
    */
-  constructor(key: K, data: D, parent: TreeNode<K, D> | null = null) {
-    this.key = key;
-    this.data = data;
-    this.parent = parent;
+  constructor(key: K, data: D = null, parent: Tree<K, D> = null, options: TreeOptions = {}) {
+    this.key = typeof key !== 'undefined' ? key : null;
+    this.data = typeof data !== 'undefined' ? data : null;
+    this.parent = typeof parent !== 'undefined' ? parent : null;
+    this.options = options || {};
     this.children = [];
     this.leftNeighbor = null;
   }
@@ -49,19 +61,17 @@ export class TreeNode<K = TreeKey, D = TreeData> {
     return {
       key: this.key,
       data: this.data,
-      parent: this.parent?.key,
       children: this.children,
-      leftNeighbor: this.leftNeighbor?.key,
     };
   }
 
   /**
    * Check if this node is a descendent of a parent.
    * 
-   * @param {TreeNode} node the parent node to check against
+   * @param {Tree} node the parent node to check against
    * @returns {boolean}
    */
-  isDescendant(node: TreeNode<K, D> | null = null): boolean {
+  isDescendant(node: Tree<K, D> | null = null): boolean {
     if (node === this.parent) {
       return true;
     }
@@ -103,9 +113,9 @@ export class TreeNode<K = TreeKey, D = TreeData> {
 
   /**
    * Returns the left sibling of this node if it exists.
-   * @returns {(TreeNode|null)} 
+   * @returns {(Tree|null)} 
    */
-  get leftSibling(): TreeNode<K, D> | null {
+  get leftSibling(): Tree<K, D> | null {
     if (!this.parent) {
       return null;
     }
@@ -119,193 +129,19 @@ export class TreeNode<K = TreeKey, D = TreeData> {
     return null;
   }
 
-  *[Symbol.iterator]() {
-    if (this.children.length > 0) {
-      for (const child of this.children) {
-        yield child;
-      }
-    }
-  }
-}
-export class Tree<K = TreeKey, D = TreeData> {
   /**
-   * @memberof Tree
-   * @member {TreeNode} root reference to the tree's root node
-   */
-  root: TreeNode<K, D>;
-  /**
-   * @memberof Tree
-   * @member {TreeOptions} options stored options passed in on object construction 
-   */
-  options: TreeOptions;
+     * Return left most descendent for a node.
+     * 
+     * The left-most descendent is defined as the left most node in the sub-tree at given depth. 
+     * 
+     * @param {Tree} root 
+     * @param {number} depth 
+     * @returns {(Tree|null)}
+     */
+  leftMostDescendant(depth = 0): Tree<K, D> | null {
+    for (const node of breadthFirstTraversal(this)) {
 
-  /**
-   * @param {TreeKey} key 
-   * @param {TreeData} data 
-   * @param {TreeOptions} options 
-   */
-  constructor(key: K, data?: D, options: TreeOptions = {}) {
-    this.root = new TreeNode<K, D>(key, data);
-    this.options = options;
-  }
-
-  /**
-   * Generates nodes in an in-order traversal
-   * 
-   * @generator
-   * @param {TreeNode} root 
-   * @yields {TreeNode}
-   */
-  *inOrderTraversal(root: TreeNode<K, D> = this.root): Generator<TreeNode<K, D>> {
-    const last = root.children && root.children[root.children?.length - 1];
-
-    if (root.children.length > 0) {
-
-      for (const child of root.children) {
-        if (child === last) {
-          break;
-        }
-
-        yield* this.inOrderTraversal(child);
-      }
-    }
-
-    yield root;
-
-    if (last) {
-      yield* this.inOrderTraversal(last);
-    }
-  }
-
-  /**
-   * Generates nodes in a post-order traversal
-   * 
-   * @generator
-   * @param {TreeNode} root 
-   * @yields {TreeNode}
-   */
-  *postOrderTraversal(root: TreeNode<K, D> = this.root): Generator<TreeNode<K, D>> {
-    if (root.children.length > 0) {
-      for (const child of root.children) {
-        yield* this.postOrderTraversal(child);
-      }
-    }
-
-    yield root;
-  }
-
-  /**
-   * Generates nodes in an pre-order traversal
-   * 
-   * @generator
-   * @param {TreeNode} root 
-   * @yields {TreeNode}
-   */
-  *preOrderTraversal(root = this.root): Generator<TreeNode<K, D>> {
-    yield root;
-
-    if (root.children.length > 0) {
-      for (const child of root.children) {
-        yield* this.preOrderTraversal(child);
-      }
-    }
-  }
-
-  /**
-   * Generates nodes in an breadth-first traversal
-   * 
-   * @generator
-   * @param {TreeNode} root 
-   * @yields {TreeNode}
-   */
-  *breadthFirstTraversal(root = this.root): Generator<TreeNode<K, D>> {
-    const collection = [root];
-
-    while (collection.length) {
-      const node = collection.shift();
-
-      if (node) {
-        yield node;
-
-        if (node.hasChildren) {
-          for (const child of node.children) {
-            collection.push(child);
-          }
-        }
-      }
-    }
-  }
-
-  /**
-   * Generates nodes at a single depth
-   * 
-   * @generator
-   * @param {TreeNode} root 
-   * @yields {TreeNode}
-   */
-  *rowTraversal(n: number): Generator<TreeNode<K, D>> {
-    if (n > this.height()) {
-      return;
-    }
-
-    for (const node of this.breadthFirstTraversal()) {
-      if (this.depth(node) === n) {
-        yield node;
-      }
-
-      if (this.depth(node) > n) {
-        return;
-      }
-    }
-  }
-
-  /**
-   * Generates left-sibling nodes
-   * 
-   * @generator
-   * @param {TreeNode} root 
-   * @yields {TreeNode}
-   */
-  *leftSiblingTraversal(node: TreeNode<K, D> | null = null): Generator<TreeNode<K, D>> {
-    let lf = node.leftSibling;
-    while (lf) {
-      yield lf;
-
-      lf = lf.leftSibling;
-    }
-  }
-
-  /**
-   * Generates left-descendant nodes
-   * 
-   * @generator
-   * @param {TreeNode} root 
-   * @yields {TreeNode}
-   */
-  *leftDescendantTraversal(node: TreeNode<K, D> | null = null): Generator<TreeNode<K, D>> {
-    let depth = 1;
-    let leftChild = this.leftMostDescendant(node, depth);
-    while (leftChild) {
-      yield leftChild;
-
-      depth += 1;
-      leftChild = this.leftMostDescendant(node, depth);
-    }
-  }
-
-  /**
-   * Return left most descendent for a node.
-   * 
-   * The left-most descendent is defined as the left most node in the sub-tree at given depth. 
-   * 
-   * @param {TreeNode} root 
-   * @param {number} depth 
-   * @returns {(TreeNode|null)}
-   */
-  leftMostDescendant(root: TreeNode<K, D> | null = this.root, depth = 0): TreeNode<K, D> | null {
-    for (const node of this.breadthFirstTraversal(root)) {
-
-      if (this.depth(node) - this.depth(root) === depth) {
+      if (this.depth(node) - this.depth(this) === depth) {
         return node;
       }
     }
@@ -315,7 +151,7 @@ export class Tree<K = TreeKey, D = TreeData> {
 
   /**
    * Perform a breadth-first traversal and connect all left neighbors by setting
-   * TreeNode.leftNeighbor.
+   * Tree.leftNeighbor.
    * 
    * The left neighbor is defined as being to the left in the same row, but not part 
    * of the same sub-tree as this nodes parent.
@@ -324,7 +160,7 @@ export class Tree<K = TreeKey, D = TreeData> {
     let last = null;
     let depth = 0;
 
-    for (const node of this.breadthFirstTraversal()) {
+    for (const node of breadthFirstTraversal(this)) {
       if (last && depth === this.depth(node) && node.siblingIndex === 0) {
         node.leftNeighbor = last;
       }
@@ -340,13 +176,13 @@ export class Tree<K = TreeKey, D = TreeData> {
    * @param {TreeKey} parentNodeKey
    * @param {TreeKey} key 
    * @param {TreeData} data 
-   * @returns {(TreeNode|null)}
+   * @returns {(Tree|null)}
    */
   insert(
     parentNodeKey: K,
     key: K,
     data?: D | Tree<K, D>,
-  ): TreeNode<K, D> | null {
+  ): Tree<K, D> | null {
     const parent = this.find(parentNodeKey);
 
     if (parent) {
@@ -356,20 +192,18 @@ export class Tree<K = TreeKey, D = TreeData> {
         throw new Error('Cannot insert child node: parent already has max children');
       }
 
-      let node: TreeNode<K, D> | null = null;
-
-      if (data && 'root' in data) {
-        node = new TreeNode<K, D>(key, data.root.data, parent);
-
-        for (const child of data.root.children) {
-          child.parent = node;
-          node.children.push(child);
-        }
-      } else {
-        node = new TreeNode<K, D>(key, data as D, parent);
+      if (data instanceof Tree) {
+        parent.children.push(data);
+        
+        data.parent = parent;
+        
+        return data;
       }
 
+      const node = new Tree<K, D>(key, data as D, parent, this.options);
       parent.children.push(node);
+
+      node.parent = parent;
 
       return node;
     }
@@ -383,8 +217,8 @@ export class Tree<K = TreeKey, D = TreeData> {
    * @param {TreeKey} key the tree key to remove
    * @returns {boolean} true if the node was found, false if it was not found.
    */
-  remove(key: K): boolean {
-    for (const node of this.preOrderTraversal()) {
+  remove(key: K = this.key): boolean {
+    for (const node of preOrderTraversal(this)) {
 
       if (node.key === key) {
         if (node.parent) {
@@ -399,26 +233,78 @@ export class Tree<K = TreeKey, D = TreeData> {
   }
 
   /**
-   * Find a node by supplying its key.
+   * Replace this node with a new node
    * 
-   * @param key 
-   * @returns {(TreeNode|null)}
+   * @param {TreeKey | (NodeFilter)} node 
+   * @returns {(Tree|null)}
    */
-  find(key: K): TreeNode<K, D> | null {
-    for (const node of this.preOrderTraversal()) {
-      if (node.key === key) return node;
+  replace(node: Tree<any, any> | ((node: Tree<any, any>) => Tree<any, any>)): Tree<any, any> {
+    if (typeof node === 'function') {
+      const newNode = node(this);
+      this.replace(newNode);
+
+      return newNode;
+    }
+
+    if (node instanceof Tree) {
+      this.key = node.key;
+      this.data = node.data;
+      this.options = node.options;
+      this.children = node.children;
+
+      node.parent = this.parent;
+      node.leftNeighbor = this.leftNeighbor;
+    }
+
+    return node;
+  }
+
+  /**
+   * Find a node by supplying its key, or a callback function
+   * 
+   * @param {TreeKey | (NodeFilter)} key 
+   * @returns {(Tree|null)}
+   */
+  find(key: K | ((node: Tree<K, D>) => boolean)): Tree<K, D> | null {
+    for (const node of preOrderTraversal(this)) {
+      if (typeof key === 'function') {
+        try {
+          // @ts-ignore
+          if (key(node)) {
+            return node as Tree<K, D>;
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      if (node.key === key) return node as Tree<K, D>;
     }
 
     return null;
   }
 
   /**
+   * Yield modes by filtering them with a callback function
+   * 
+   * @param {NodeFilter} fn filter callback function 
+   * @yields {Tree}
+   */
+  *filter(fn: ((node: Tree<K, D>) => boolean)): Generator<Tree<K, D>> {
+    for (const n of preOrderTraversal(this)) {
+      if (fn(n)) {
+        yield n;
+      }
+    }
+  }
+
+  /**
    * Return depth of a node.
    * 
-   * @param {TreeNode} node 
+   * @param {Tree} node 
    * @returns {number}
    */
-  depth(node: TreeNode<K, D> | null = this.root): number {
+  depth(node: Tree<K, D> | null = this): number {
     if (node?.parent) {
       return this.depth(node.parent) + 1;
     }
@@ -429,10 +315,10 @@ export class Tree<K = TreeKey, D = TreeData> {
   /**
    * Return the height of a node.
    * 
-   * @param {TreeNode} node 
+   * @param {Tree} node 
    * @returns {number}
    */
-  height(node: TreeNode<K, D> | null = this.root): number {
+  height(node: Tree<K, D> | null = this): number {
     if (node.children.length) {
       return Math.max(...node.children.map(c => this.height(c))) + 1;
     }
@@ -441,10 +327,155 @@ export class Tree<K = TreeKey, D = TreeData> {
   }
 
   *[Symbol.iterator]() {
-    if (this.root.children.length > 0) {
-      for (const child of this.root.children) {
+    if (this.children.length > 0) {
+      for (const child of this.children) {
         yield child;
       }
     }
+  }
+}
+
+/**
+   * Generates nodes in an in-order traversal
+   * 
+   * @generator
+   * @param {Tree} root 
+   * @yields {Tree}
+   */
+export function* inOrderTraversal(root: Tree = this.root): Generator<Tree> {
+  const last = root.children && root.children[root.children?.length - 1];
+
+  if (root.children.length > 0) {
+
+    for (const child of root.children) {
+      if (child === last) {
+        break;
+      }
+
+      yield* inOrderTraversal(child);
+    }
+  }
+
+  yield root;
+
+  if (last) {
+    yield* inOrderTraversal(last);
+  }
+}
+
+/**
+ * Generates nodes in a post-order traversal
+ * 
+ * @generator
+ * @param {Tree} root 
+ * @yields {Tree}
+ */
+export function* postOrderTraversal<N extends Tree<any, any>>(root: N): Generator<N> {
+  if (root.children.length > 0) {
+    for (const child of root.children) {
+      yield* postOrderTraversal(child as N);
+    }
+  }
+
+  yield root;
+}
+
+/**
+ * Generates nodes in an pre-order traversal
+ * 
+ * @generator
+ * @param {Tree} root 
+ * @yields {Tree}
+ */
+export function* preOrderTraversal<N extends Tree<any, any>>(root: N): Generator<N> {
+  yield root;
+
+  if (root.children.length > 0) {
+    for (const child of root.children) {
+      yield* preOrderTraversal(child as N);
+    }
+  }
+}
+
+/**
+ * Generates nodes in an breadth-first traversal
+ * 
+ * @generator
+ * @param {Tree} root 
+ * @yields {Tree}
+ */
+export function* breadthFirstTraversal<N extends Tree<any, any>>(root: N): Generator<N> {
+  const collection: any[] = [root];
+
+  while (collection.length) {
+    const node = collection.shift();
+
+    if (node) {
+      yield node;
+
+      if (node.hasChildren) {
+        for (const child of node.children) {
+          collection.push(child);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Generates nodes at a single depth
+ * 
+ * @generator
+ * @param {Tree} node 
+ * @param {number} row depth 
+ * @yields {Tree}
+ */
+export function* rowTraversal<N extends Tree<any, any>>(node: N, row: number): Generator<N> {
+  if (row > node.height()) {
+    return;
+  }
+
+  for (const n of breadthFirstTraversal(node)) {
+    if (n.depth(n) === row) {
+      yield n;
+    }
+
+    if (n.depth(n) > row) {
+      return;
+    }
+  }
+}
+
+/**
+ * Generates left-sibling nodes
+ * 
+ * @generator
+ * @param {Tree} root 
+ * @yields {Tree}
+ */
+export function* leftSiblingTraversal<N extends Tree<any, any>>(node: N): Generator<N> {
+  let lf = node.leftSibling;
+  while (lf) {
+    yield lf as N;
+
+    lf = lf.leftSibling;
+  }
+}
+
+/**
+ * Generates left-descendant nodes
+ * 
+ * @generator
+ * @param {Tree} root 
+ * @yields {Tree}
+ */
+export function* leftDescendantTraversal<N extends Tree<any, any>>(node: N): Generator<N> {
+  let depth = 1;
+  let leftChild = node.leftMostDescendant(depth);
+  while (leftChild) {
+    yield leftChild as N;
+
+    depth += 1;
+    leftChild = node.leftMostDescendant(depth);
   }
 }
