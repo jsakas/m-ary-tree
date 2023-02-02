@@ -1,7 +1,40 @@
+# [0.6.0](https://github.com/jsakas/m-ary-tree/compare/v0.5.0...v0.6.0) (2023-01-30)
+
+
+### Bug Fixes
+
+* **exports:** remove exports and update target ([1a9622f](https://github.com/jsakas/m-ary-tree/commit/1a9622fb177489dd6511f7083ca5a258a92a23ff))
+
+
+
+# [0.5.0](https://github.com/jsakas/m-ary-tree/compare/v0.4.2...v0.5.0) (2023-01-25)
+
+
+### Bug Fixes
+
+* calculateCoordinates should be named export ([db08d6d](https://github.com/jsakas/m-ary-tree/commit/db08d6d50323289842a37ce0bd718b501dee60bf))
+* package json exports ([d63c967](https://github.com/jsakas/m-ary-tree/commit/d63c967a259422f7ca4942d4989746b21d24ad81))
+
+
+
+## [0.4.2](https://github.com/jsakas/m-ary-tree/compare/v0.4.1...v0.4.2) (2022-08-26)
+
+
+### Bug Fixes
+
+* docs link ([698b81c](https://github.com/jsakas/m-ary-tree/commit/698b81c83b35ab08a4daf1abbb0e38943e793cc9))
+
+
+### Features
+
+* support variable spacingTop & spacingBottom for each node in Ploeg's algorithm ([de358fa](https://github.com/jsakas/m-ary-tree/commit/de358faa53e4e78c702385b7ae26a0175c7c4258))
+* support variable spacingY for each node in Ploeg's algorithm ([ef08c22](https://github.com/jsakas/m-ary-tree/commit/ef08c22647824aff46d5b6a658403dcdcbcb26da))
+
+
+
 ## [0.4.1](https://github.com/jsakas/m-ary-tree/compare/v0.4.0...v0.4.1) (2022-08-04)
 
-* documentation update only
-  ([c1c8d8f](https://github.com/jsakas/m-ary-tree/commit/c1c8d8fd055c37f69deea1077b476138d36325eb))
+
 
 # [0.4.0](https://github.com/jsakas/m-ary-tree/compare/v0.3.0...v0.4.0) (2022-08-04)
 
