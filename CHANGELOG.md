@@ -1,3 +1,18 @@
+# [1.0.0](https://github.com/jsakas/m-ary-tree/compare/v0.6.0...v1.0.0) (2023-02-02)
+
+
+### Bug Fixes
+
+* use any for replace node type ([373eae2](https://github.com/jsakas/m-ary-tree/commit/373eae28f49b9f90bcfb351de9f691c99d47f0be))
+
+
+### Features
+
+* implement replace and remove nodes ([451ea47](https://github.com/jsakas/m-ary-tree/commit/451ea47039f555ea4772a6bbdb7c2c507447aaa6))
+* remove traversal function from class, use single class for tree nodes ([f587b37](https://github.com/jsakas/m-ary-tree/commit/f587b379fe4ac87a7098c2651a6d3a629f0afc4a))
+
+
+
 # [0.6.0](https://github.com/jsakas/m-ary-tree/compare/v0.5.0...v0.6.0) (2023-01-30)
 
 
