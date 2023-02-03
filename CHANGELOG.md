@@ -1,3 +1,12 @@
+## [1.0.1](https://github.com/jsakas/m-ary-tree/compare/v1.0.0...v1.0.1) (2023-02-03)
+
+
+### Bug Fixes
+
+* module should be commonjs ([29d0d4c](https://github.com/jsakas/m-ary-tree/commit/29d0d4c22bef01de1faf5da0640c3d49901c0034))
+
+
+
 # [1.0.0](https://github.com/jsakas/m-ary-tree/compare/v0.6.0...v1.0.0) (2023-02-02)
 
 
