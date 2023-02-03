@@ -5,6 +5,7 @@
     "downlevelIteration": true,
     "declaration": true,
     "outDir": "dist",
+    "module": "commonjs",
     "target": "ES2015",
     "sourceMap": true
   },
